@@ -288,7 +288,7 @@ This deployment creates a RabbitMQ service.
    Example:
 
     ```console
-    kubectl get pods \
+    oc get pods \
       --namespace ${DEMO_NAMESPACE} \
       --watch
     ```
@@ -360,7 +360,7 @@ in later steps.
    Example:
 
     ```console
-    export SENZING_BASE_POD_NAME=$(kubectl get pods \
+    export SENZING_BASE_POD_NAME=$(oc get pods \
       --namespace ${DEMO_NAMESPACE} \
       --output jsonpath="{.items[0].metadata.name}" \
       --selector "app.kubernetes.io/name=senzing-base, \
@@ -372,7 +372,7 @@ in later steps.
    Example:
 
     ```console
-    kubectl get pods \
+    oc get pods \
       --namespace ${DEMO_NAMESPACE} \
       --watch
     ```
@@ -463,7 +463,7 @@ The init-container creates files from templates and initializes the G2 database.
    Example:
 
     ```console
-    kubectl get pods \
+    oc get pods \
       --namespace ${DEMO_NAMESPACE} \
       --watch
     ```
@@ -502,7 +502,7 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
    Example:
 
     ```console
-    kubectl get pods \
+    oc get pods \
       --namespace ${DEMO_NAMESPACE} \
       --watch
     ```
