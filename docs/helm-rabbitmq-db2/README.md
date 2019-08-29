@@ -224,16 +224,16 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
    Example:
 
     ```console
-    kubectl create -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
-    kubectl create -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
     ```
 
 1. Create persistent volume claims.
    Example:
 
     ```console
-    kubectl create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
-    kubectl create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     ```
 
 1. Optional: Review persistent volumes and claims.
