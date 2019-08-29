@@ -25,22 +25,23 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Time](#time)
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
-    1. [Prerequisite software](#prerequisite-software)
     1. [Clone repository](#clone-repository)
 1. [Demonstrate](#demonstrate)
     1. [EULA](#eula)
     1. [Set environment variables](#set-environment-variables)
+    1. [Database connection information](#database-connection-information)
     1. [Create custom helm values files](#create-custom-helm-values-files)
     1. [Create custom kubernetes configuration files](#create-custom-kubernetes-configuration-files)
-    1. [Create namespace](#create-namespace)
     1. [Create persistent volume](#create-persistent-volume)
     1. [Add helm repositories](#add-helm-repositories)
-    1. [Deploy Senzing RPM](#deploy-senzing-rpm)
-    1. [Install IBM Db2 Driver](#install-ibm-db2-driver)
-    1. [Install senzing-debug Helm chart](#install-senzing-debug-helm-chart)
-    1. [Install DB2 Helm chart](#install-db2-helm-chart)
     1. [Install RabbitMQ Helm chart](#install-rabbitmq-helm-chart)
     1. [Install mock-data-generator Helm chart](#install-mock-data-generator-helm-chart)
+    1. [Deploy Senzing RPM](#deploy-senzing-rpm)
+    1. [Install IBM Db2 Driver](#install-ibm-db2-driver)
+    1. [Install senzing-base Helm chart](#install-senzing-base-helm-chart)
+    1. [Install Senzing license](#install-senzing-license)
+    1. [Get Senzing schema sql for Db2](#get-senzing-schema-sql-for-db2)
+    1. [Create Senzing schema on Db2](#create-senzing-schema-on-db2)
     1. [Install init-container Helm chart](#install-init-container-helm-chart)
     1. [Install stream-loader Helm chart](#install-stream-loader-helm-chart)
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
@@ -48,7 +49,8 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [View data](#view-data)
 1. [Cleanup](#cleanup)
     1. [Delete everything in project](#delete-everything-in-project)
-    1. [Delete minikube cluster](#delete-minikube-cluster)
+    1. [Delete database tables](#delete-database-tables)
+    1. [Delete git repository](#delete-git-repository)
 
 ## Expectations
 
@@ -282,6 +284,15 @@ This deployment creates a RabbitMQ service.
       stable/rabbitmq
     ```
 
+1. Wait for pods to run.
+   Example:
+
+    ```console
+    kubectl get pods \
+      --namespace ${DEMO_NAMESPACE} \
+      --watch
+    ```
+
 1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
 
 ### Install mock-data-generator Helm chart
@@ -404,6 +415,8 @@ and this step may be skipped.
 
 ### Get Senzing schema sql for Db2
 
+The step copies the SQL file used to create the Senzing database schema onto the local workstation.
+
 1. Be sure the `senzing-base` Helm Chart has been installed.
    See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
 
@@ -429,7 +442,7 @@ and this step may be skipped.
 
 ### Create Senzing schema on Db2
 
-1. FIXME:
+1. **FIXME:**
 
 ### Install init-container Helm chart
 
@@ -485,13 +498,7 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
       senzing/senzing-api-server
     ```
 
-1. To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server)
-
-### Install senzing-entity-search-web-app Helm chart
-
-The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing search capabilities.
-
-1. Wait for previous pods to run.
+1. Wait for pods to run.
    Example:
 
     ```console
@@ -499,6 +506,12 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
       --namespace ${DEMO_NAMESPACE} \
       --watch
     ```
+
+1. To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server)
+
+### Install senzing-entity-search-web-app Helm chart
+
+The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing search capabilities.
 
 1. Install chart.
    Example:
@@ -522,7 +535,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 
     ```console
     export DEMO_PREFIX=my
-    export DEMO_NAMESPACE=${DEMO_PREFIX}-namespace
+    export DEMO_NAMESPACE=zen
     ```
 
 #### View RabbitMQ
@@ -591,17 +604,16 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     helm delete --purge ${DEMO_PREFIX}-senzing-api-server
     helm delete --purge ${DEMO_PREFIX}-senzing-stream-loader
     helm delete --purge ${DEMO_PREFIX}-senzing-init-container
-    helm delete --purge ${DEMO_PREFIX}-senzing-mock-data-generator
-    helm delete --purge ${DEMO_PREFIX}-rabbitmq
     helm delete --purge ${DEMO_PREFIX}-senzing-base
     helm delete --purge ${DEMO_PREFIX}-ibm-db2-driver-installer
     helm delete --purge ${DEMO_PREFIX}-senzing-yum
+    helm delete --purge ${DEMO_PREFIX}-senzing-mock-data-generator
+    helm delete --purge ${DEMO_PREFIX}-rabbitmq
     helm repo remove senzing
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
-    kubectl delete -f ${KUBERNETES_DIR}/namespace.yaml
     ```
 
 ### Delete database tables
