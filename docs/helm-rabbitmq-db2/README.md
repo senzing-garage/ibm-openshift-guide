@@ -404,7 +404,7 @@ and this step may be skipped.
     Example:
 
     ```console
-    kubectl cp \
+    oc cp \
       --namespace ${DEMO_NAMESPACE} \
       ${G2_LICENSE_PATH} \
       ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/etc/opt/senzing/g2.lic
@@ -434,7 +434,7 @@ The step copies the SQL file used to create the Senzing database schema onto the
     Example:
 
     ```console
-    kubectl cp \
+    oc cp \
       --namespace ${DEMO_NAMESPACE} \
       ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/g2/resources/schema/g2core-schema-db2-create.sql \
       ${SENZING_LOCAL_SQL_PATH}
@@ -544,7 +544,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
    Example:
 
     ```console
-    kubectl port-forward \
+    oc port-forward \
       --address 0.0.0.0 \
       --namespace ${DEMO_NAMESPACE} \
       svc/${DEMO_PREFIX}-rabbitmq 15672:15672
@@ -560,7 +560,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
    Example:
 
     ```console
-    kubectl port-forward \
+    oc port-forward \
       --address 0.0.0.0 \
       --namespace ${DEMO_NAMESPACE} \
       svc/${DEMO_PREFIX}-senzing-api-server 8889:8080
@@ -583,7 +583,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
    Example:
 
     ```console
-    kubectl port-forward \
+    oc port-forward \
       --address 0.0.0.0 \
       --namespace ${DEMO_NAMESPACE} \
       svc/${DEMO_PREFIX}-senzing-entity-search-web-app 8888:80
@@ -610,10 +610,10 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     helm delete --purge ${DEMO_PREFIX}-senzing-mock-data-generator
     helm delete --purge ${DEMO_PREFIX}-rabbitmq
     helm repo remove senzing
-    kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
-    kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
-    kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
-    kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
+    oc delete -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
+    oc delete -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
+    oc delete -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
+    oc delete -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     ```
 
 ### Delete database tables
