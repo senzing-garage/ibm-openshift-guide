@@ -73,6 +73,10 @@ This repository assumes a working knowledge of:
 
 ## Prerequisites
 
+### Cloud Pak for Data
+
+1. See [Installing Cloud Pak for Data on Red Hat OpenShift (without IBM Cloud Private)](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/install/openshift-noicp.html).
+
 ### Clone repository
 
 The Git repository has files that will be used in the `helm install --values` parameter.
