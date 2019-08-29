@@ -239,10 +239,10 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 1. Optional: Review persistent volumes and claims.
 
     ```console
-    kubectl get persistentvolumes \
+    oc get persistentvolumes \
       --namespace ${DEMO_NAMESPACE}
 
-    kubectl get persistentvolumeClaims \
+    oc get persistentvolumeClaims \
       --namespace ${DEMO_NAMESPACE}
     ```
 
