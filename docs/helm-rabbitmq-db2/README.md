@@ -25,6 +25,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Time](#time)
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
+    1. [Cloud Pak for Data](#cloud-pak-for-data)
     1. [Clone repository](#clone-repository)
 1. [Demonstrate](#demonstrate)
     1. [EULA](#eula)
