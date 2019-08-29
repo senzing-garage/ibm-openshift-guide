@@ -66,35 +66,10 @@ This repository assumes a working knowledge of:
 
 1. [Docker](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/docker.md)
 1. [Kubernetes](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/kubernetes.md)
+1. [OpenShift](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/openshift.md)
 1. [Helm](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/helm.md)
 
 ## Prerequisites
-
-### Prerequisite software
-
-#### kubectl
-
-1. [Install kubectl](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-kubectl.md).
-
-#### minikube cluster
-
-1. [Install minikube](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-minikube.md).
-1. [Start cluster](https://docs.bitnami.com/kubernetes/get-started-kubernetes/#overview)
-
-    ```console
-    minikube start --cpus 4 --memory 8192 --disk-size=50g
-    ```
-
-    Alternative:
-
-    ```console
-    minikube start --cpus 4 --memory 8192 --disk-size=50g --vm-driver kvm2
-    ```
-
-#### Helm/Tiller
-
-1. [Install Helm](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-helm.md) on your local workstation.
-1. [Install Tiller](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-tiller.md) in the minikube cluster.
 
 ### Clone repository
 
@@ -104,7 +79,7 @@ The Git repository has files that will be used in the `helm install --values` pa
 
     ```console
     export GIT_ACCOUNT=senzing
-    export GIT_REPOSITORY=kubernetes-demo
+    export GIT_REPOSITORY=ibm-openshift-guide
     ```
 
 1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
@@ -149,6 +124,38 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     ```
 
 1. Set environment variables listed in "[Clone repository](#clone-repository)".
+
+### Database connection information
+
+1. Craft the `SENZING_DATABASE_URL`.  It will be used in "helm values" files.
+
+    Components of the URL:
+
+    ```console
+    export DATABASE_USERNAME=<my-username>
+    export DATABASE_PASSWORD=<my-password>
+    export DATABASE_HOST=<hostname>
+    export DATABASE_PORT=<db2-connnection-port>
+    export DATABASE_DATABASE=<database-name>
+    ```
+
+    :pencil2: Set environment variables.  Example:
+
+    ```console
+    export DATABASE_USERNAME=johnsmith
+    export DATABASE_PASSWORD=secret
+    export DATABASE_HOST=my.database.com
+    export DATABASE_PORT=50000
+    export DATABASE_DATABASE=G2
+    ```
+
+    Construct database URL.  Example:
+
+    ```console
+    export SENZING_DATABASE_URL="db2://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}"
+
+    echo ${SENZING_DATABASE_URL}
+    ```
 
 ### Create custom helm values files
 
@@ -230,7 +237,6 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
    Example:
 
     ```console
-    kubectl create -f ${KUBERNETES_DIR}/persistent-volume-db2.yaml
     kubectl create -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     kubectl create -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
     ```
@@ -239,7 +245,6 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
    Example:
 
     ```console
-    kubectl create -f ${KUBERNETES_DIR}/persistent-volume-claim-db2.yaml
     kubectl create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
     kubectl create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     ```
@@ -292,59 +297,68 @@ This deployment initializes the Persistent Volume with Senzing code and data.
       senzing/senzing-yum
     ```
 
-### Install IBM Db2 Driver
-
-This step adds the IBM Db2 Client driver code.
+### Install senzing-base Helm Chart
 
 1. Install chart.
    Example:
 
     ```console
     helm install \
-      --name ${DEMO_PREFIX}-ibm-db2-driver-installer \
+      --name ${DEMO_PREFIX}-senzing-base \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/ibm-db2-driver-installer.yaml \
-      senzing/ibm-db2-driver-installer
+      --values ${HELM_VALUES_DIR}/senzing-base.yaml \
+       senzing/senzing-base
     ```
 
-1. Wait until Jobs have completed.
+1. Find pod name.
    Example:
 
     ```console
-    kubectl get pods \
+    export SENZING_BASE_POD_NAME=$(kubectl get pods \
       --namespace ${DEMO_NAMESPACE} \
-      --watch
+      --output jsonpath="{.items[0].metadata.name}" \
+      --selector "app.kubernetes.io/name=senzing-base, \
+                  app.kubernetes.io/instance=${DEMO_PREFIX}-senzing-base" \
+      )
     ```
 
-1. Example of completion:
+### Install Senzing license
+
+This is an optional step.
+Senzing comes with a trial license that supports 10,000 records.
+If this is sufficient, there is no need to install a new license
+and this step may be skipped.
+
+1. If working with more than 10,000 records,
+   [obtain a Senzing license](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/obtain-senzing-license.md).
+
+1. Be sure the `senzing-base` Helm Chart has been installed.
+   See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
+
+1.
+
+1. Copy the `g2.lic` file to the `senzing-debug` pod
+   at `/opt/senzing/g2/data/g2.lic`.
+
+    :pencil2: Identify location of `g2.lic` on local workstation.  Example:
 
     ```console
-    NAME                               READY  STATUS     RESTARTS  AGE
-    my-senzing-yum-8n2ql               0/1    Completed  0         2m44s
-    my-ibm-db2-driver-installer-z8d45  0/1    Completed  0         1m35s
+    export G2_LICENSE_PATH=/path/to/local/g2.lic
     ```
 
-### Install senzing-debug Helm chart
-
-This deployment will be used later to:
-
-- Inspect mounted volumes
-- Debug issues
-
-1. Install chart.
-   Example:
+    Copy file to debug pod.  Example:
 
     ```console
-    helm install \
-      --name ${DEMO_PREFIX}-senzing-debug \
+    kubectl cp \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${GIT_REPOSITORY_DIR}/helm-values/senzing-debug.yaml \
-       senzing/senzing-debug
+      ${G2_LICENSE_PATH} \
+      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/g2/g2.lic
     ```
 
-1. To use senzing-debug pod, see [View Senzing Debug pod](#view-senzing-debug-pod).
+1. Note: `/opt/senzing` is attached as a Kubernetes Persistent Volume Claim (PVC),
+   so the license will be seen by all pods that attach to the PVC.
 
-### Install Db2 Helm chart
+### (locate and populate Db2 with Senzing schema)
 
 This step starts IBM Db2 database and populates the database with the Senzing schema.
 
@@ -583,18 +597,19 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     helm repo remove senzing
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
-    kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-claim-db2.yaml
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
     kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
-    kubectl delete -f ${KUBERNETES_DIR}/persistent-volume-db2.yaml
     kubectl delete -f ${KUBERNETES_DIR}/namespace.yaml
     ```
 
-### Delete minikube cluster
+### Delete database tables
 
-1. Example:
+1. **FIXME:** Example:
+
+### Delete git repository
+
+1. Delete git repository.  Example:
 
     ```console
-    minikube stop
-    minikube delete
+    sudo rm -rf ${GIT_REPOSITORY_DIR}
     ```

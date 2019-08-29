@@ -3,7 +3,7 @@ image:
 
 senzing:
   subcommand: rabbitmq
-  databaseUrl: "db2://db2inst1:db2inst1@${DEMO_PREFIX}-senzing-ibm-db2:50000/G2"
+  databaseUrl: "${SENZING_DATABASE_URL}"
   dataSource: TEST
   entityType: TEST
   logLevel: info
