@@ -282,6 +282,32 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 1. Reference: [helm repo](https://helm.sh/docs/helm/#helm-repo)
 
+### Install RabbitMQ Helm chart
+
+This deployment creates a RabbitMQ service.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install \
+      --name ${DEMO_PREFIX}-rabbitmq \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/rabbitmq.yaml \
+      stable/rabbitmq
+    ```
+
+1. Wait for pods to run.
+   Example:
+
+    ```console
+    kubectl get pods \
+      --namespace ${DEMO_NAMESPACE} \
+      --watch
+    ```
+
+1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
+
 ### Deploy Senzing RPM
 
 This deployment initializes the Persistent Volume with Senzing code and data.
@@ -297,7 +323,25 @@ This deployment initializes the Persistent Volume with Senzing code and data.
       senzing/senzing-yum
     ```
 
+### Install IBM Db2 Driver
+
+This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install \
+      --name ${DEMO_PREFIX}-ibm-db2-driver-installer \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/ibm-db2-driver-installer.yaml \
+      senzing/ibm-db2-driver-installer
+    ```
+
 ### Install senzing-base Helm Chart
+
+This deployment provides a pod that is used to copy files to and from the Persistent Volume
+in later steps.
 
 1. Install chart.
    Example:
@@ -335,67 +379,59 @@ and this step may be skipped.
 1. Be sure the `senzing-base` Helm Chart has been installed.
    See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
 
-1.
-
 1. Copy the `g2.lic` file to the `senzing-debug` pod
    at `/opt/senzing/g2/data/g2.lic`.
 
-    :pencil2: Identify location of `g2.lic` on local workstation.  Example:
+    :pencil2: Identify location of `g2.lic` on local workstation.
+    Example:
 
     ```console
     export G2_LICENSE_PATH=/path/to/local/g2.lic
     ```
 
-    Copy file to debug pod.  Example:
+    Copy file to debug pod.
+    Example:
 
     ```console
     kubectl cp \
       --namespace ${DEMO_NAMESPACE} \
       ${G2_LICENSE_PATH} \
-      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/g2/g2.lic
+      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/etc/opt/senzing/g2.lic
     ```
 
-1. Note: `/opt/senzing` is attached as a Kubernetes Persistent Volume Claim (PVC),
+1. Note: `/etc/opt/senzing` is attached as a Kubernetes Persistent Volume Claim (PVC),
    so the license will be seen by all pods that attach to the PVC.
 
-### (locate and populate Db2 with Senzing schema)
+### Get Senzing schema sql for Db2
 
-This step starts IBM Db2 database and populates the database with the Senzing schema.
+1. Be sure the `senzing-base` Helm Chart has been installed.
+   See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
 
-1. Install chart.
-   Example:
+1. Copy the `/opt/senzing/g2/resources/schema/g2core-schema-db2-create.sql`
+   file from the `senzing-base` pod.
 
-    ```console
-    helm install \
-      --name ${DEMO_PREFIX}-senzing-ibm-db2 \
-      --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/senzing-ibm-db2.yaml \
-      senzing/senzing-ibm-db2
-    ```
-
-### Install RabbitMQ Helm chart
-
-1. Install chart.
-   Example:
+    :pencil2: Identify location to place `g2core-schema-db2-create.sql` on local workstation.
+    Example:
 
     ```console
-    helm install \
-      --name ${DEMO_PREFIX}-rabbitmq \
-      --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/rabbitmq.yaml \
-      stable/rabbitmq
+    export SENZING_LOCAL_SQL_PATH=/path/to/local/g2core-schema-db2-create.sql
     ```
 
-1. Wait for pods to run.
-   Example:
+    Copy file from pod to local workstation.
+    Example:
 
     ```console
-    kubectl get pods \
+    kubectl cp \
       --namespace ${DEMO_NAMESPACE} \
-      --watch
+      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/g2/resources/schema/g2core-schema-db2-create.sql \
+      ${SENZING_LOCAL_SQL_PATH}
     ```
 
-1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
+### Create Senzing schema on Db2
+
+1. FIXME:
+
+
 
 ### Install mock-data-generator Helm chart
 
@@ -506,22 +542,6 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     export DEMO_NAMESPACE=${DEMO_PREFIX}-namespace
     ```
 
-#### View Senzing Debug pod
-
-1. In a separate terminal window, log into debug pod.
-   Example:
-
-    ```console
-    export DEBUG_POD_NAME=$(kubectl get pods \
-      --namespace ${DEMO_NAMESPACE} \
-      --output jsonpath="{.items[0].metadata.name}" \
-      --selector "app.kubernetes.io/name=senzing-debug, \
-                  app.kubernetes.io/instance=${DEMO_PREFIX}-senzing-debug" \
-      )
-
-    kubectl exec -it --namespace ${DEMO_NAMESPACE} ${DEBUG_POD_NAME} -- /bin/bash
-    ```
-
 #### View RabbitMQ
 
 1. In a separate terminal window, port forward to local machine.
@@ -590,8 +610,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     helm delete --purge ${DEMO_PREFIX}-senzing-init-container
     helm delete --purge ${DEMO_PREFIX}-senzing-mock-data-generator
     helm delete --purge ${DEMO_PREFIX}-rabbitmq
-    helm delete --purge ${DEMO_PREFIX}-senzing-ibm-db2
-    helm delete --purge ${DEMO_PREFIX}-senzing-debug
+    helm delete --purge ${DEMO_PREFIX}-senzing-base
     helm delete --purge ${DEMO_PREFIX}-ibm-db2-driver-installer
     helm delete --purge ${DEMO_PREFIX}-senzing-yum
     helm repo remove senzing
