@@ -282,16 +282,22 @@ This deployment creates a RabbitMQ service.
       stable/rabbitmq
     ```
 
-1. Wait for pods to run.
+1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
+
+### Install mock-data-generator Helm chart
+
+The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ.
+
+1. Install chart.
    Example:
 
     ```console
-    kubectl get pods \
+    helm install \
+      --name ${DEMO_PREFIX}-senzing-mock-data-generator \
       --namespace ${DEMO_NAMESPACE} \
-      --watch
+      --values ${HELM_VALUES_DIR}/mock-data-generator-rabbitmq.yaml \
+      senzing/senzing-mock-data-generator
     ```
-
-1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
 
 ### Deploy Senzing RPM
 
@@ -349,6 +355,15 @@ in later steps.
       --selector "app.kubernetes.io/name=senzing-base, \
                   app.kubernetes.io/instance=${DEMO_PREFIX}-senzing-base" \
       )
+    ```
+
+1. Wait for pods to run.
+   Example:
+
+    ```console
+    kubectl get pods \
+      --namespace ${DEMO_NAMESPACE} \
+      --watch
     ```
 
 ### Install Senzing license
@@ -415,23 +430,6 @@ and this step may be skipped.
 ### Create Senzing schema on Db2
 
 1. FIXME:
-
-
-
-### Install mock-data-generator Helm chart
-
-The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ.
-
-1. Install chart.
-   Example:
-
-    ```console
-    helm install \
-      --name ${DEMO_PREFIX}-senzing-mock-data-generator \
-      --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/mock-data-generator-rabbitmq.yaml \
-      senzing/senzing-mock-data-generator
-    ```
 
 ### Install init-container Helm chart
 
