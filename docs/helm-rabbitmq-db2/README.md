@@ -216,21 +216,6 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
     1. `${DEMO_NAMESPACE}`
 
-### Create namespace
-
-1. Create namespace.
-   Example:
-
-    ```console
-    kubectl create -f ${KUBERNETES_DIR}/namespace.yaml
-    ```
-
-1. Optional: Review namespaces.
-
-    ```console
-    kubectl get namespaces
-    ```
-
 ### Create persistent volume
 
 1. Create persistent volumes.
