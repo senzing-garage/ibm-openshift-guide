@@ -1,6 +1,12 @@
 image:
   registry: ${DOCKER_REGISTRY_URL}
 
+securityContext:
+  enabled: true
+  runAsUser: 0
+  runAsGroup: 0
+  fsGroup: 0
+
 senzing:
   databaseUrl: "${SENZING_DATABASE_URL}"
   persistentVolumeClaim: senzing-persistent-volume-claim
