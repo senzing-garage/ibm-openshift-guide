@@ -165,7 +165,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 There are two methods of accomplishing this.
 Only one method needs to be performed.
 
-1. Method #1. Quick method using `envsubst`.
+1. **Method #1:** Quick method using `envsubst`.
    Example:
 
     ```console
@@ -178,7 +178,7 @@ Only one method needs to be performed.
     done
     ```
 
-1. Method #2. Copy and manually modify files method.
+1. **Method #2:** Copy and manually modify files method.
 
     ```console
     export HELM_VALUES_DIR=${GIT_REPOSITORY_DIR}/helm-values
@@ -201,7 +201,7 @@ Only one method needs to be performed.
 There are two methods of accomplishing this.
 Only one method needs to be performed.
 
-1. Method #1. Quick method using `envsubst`.
+1. **Method #1:** Quick method using `envsubst`.
    Example:
 
     ```console
@@ -214,7 +214,7 @@ Only one method needs to be performed.
     done
     ```
 
-1. Method #2. Copy and manually modify files method.
+1. **Method #2:** Copy and manually modify files method.
 
     ```console
     export KUBERNETES_DIR=${GIT_REPOSITORY_DIR}/kubernetes
