@@ -269,12 +269,14 @@ Only one method needs to be performed.
     ```
 
 1. Update repositories.
+   Example:
 
     ```console
     helm repo update
     ```
 
 1. :thinking: **Optional:** Review repositories.
+   Example:
 
     ```console
     helm repo list
@@ -392,7 +394,7 @@ in later steps.
 
 ### Install Senzing license
 
-This is an optional step.
+:thinking: **Optional:**
 Senzing comes with a trial license that supports 10,000 records.
 If this is sufficient, there is no need to install a new license
 and this step may be skipped.
