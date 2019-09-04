@@ -273,7 +273,7 @@ Only one method needs to be performed.
     helm repo update
     ```
 
-1. :thinking: **Optional:** Review repositories
+1. :thinking: **Optional:** Review repositories.
 
     ```console
     helm repo list
@@ -399,7 +399,7 @@ and this step may be skipped.
 1. If working with more than 10,000 records,
    [obtain a Senzing license](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/obtain-senzing-license.md).
 
-1. Be sure the `senzing-base` Helm Chart has been installed.
+1. Be sure the `senzing-base` Helm Chart has been installed and is running.
    See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
 
 1. Copy the `g2.lic` file to the `senzing-debug` pod
@@ -429,7 +429,7 @@ and this step may be skipped.
 
 The step copies the SQL file used to create the Senzing database schema onto the local workstation.
 
-1. Be sure the `senzing-base` Helm Chart has been installed.
+1. Be sure the `senzing-base` Helm Chart has been installed and is runnning.
    See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
 
 1. Copy the `/opt/senzing/g2/resources/schema/g2core-schema-db2-create.sql`
@@ -536,7 +536,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
       senzing/senzing-entity-search-web-app
     ```
 
-1. Wait until Deployment has completed.
+1. Wait for pod to run.
    Example:
 
     ```console
