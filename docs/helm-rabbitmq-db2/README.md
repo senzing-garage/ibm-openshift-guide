@@ -454,7 +454,75 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 ### Create Senzing schema on Db2
 
-1. **FIXME:**
+1. Copy `g2core-schema-db2-create.sq` to FIXME:
+   Example:
+
+   ```console
+   FIXME:
+   ```
+
+1. Logon to FIXME:
+
+1. If needed, create a database for Senzing data.
+   Example:
+
+    ```console
+    su - db2inst1
+    export DB2_DATABASE=G2
+
+    source sqllib/db2profile
+    db2 create database ${DB2_DATABASE} using codeset utf-8 territory us
+    ```
+
+1. Connect to `DB2_DATABASE`.
+   Example:
+
+    ```console
+    su - db2inst1
+    export DB2_DATABASE=G2
+    export DB2_USER=db2inst1
+
+    source sqllib/db2profile
+    db2 connect to ${DB2_DATABASE} user ${DB2_USER}
+    ```
+
+    When requested, supply password.
+
+1. Create tables in schema.
+   Example:
+
+    ```console
+    db2 -tvf g2core-schema-db2-create.sql
+    db2 terminate
+    ```
+
+### Database tuning
+
+**FIXME:** Continue to improve.
+
+1. For information on tuning the database for optimum performance, see
+   [Tuning your Database](https://senzing.zendesk.com/hc/en-us/articles/360016288254-Tuning-your-Database).
+
+1. Additional tuning parameters to try:
+
+    ```console
+    db2set DB2_USE_ALTERNATE_PAGE_CLEANING=ON
+    db2set DB2_APPENDERS_PER_PAGE=1
+    db2set DB2_INLIST_TO_NLJN=YES
+    db2set DB2_LOGGER_NON_BUFFERED_IO=ON
+    db2set DB2_SKIP_LOG_WAIT=YES
+    db2set DB2_APM_PERFORMANCE=off
+    db2set DB2_SKIPLOCKED_GRAMMAR=YES
+    ```
+
+1. Additional tuning parameters to try:
+
+    ```console
+    db2 connect to ${DB2_DATABASE} user ${DB2_USER}
+
+    db2 UPDATE SYS_SEQUENCE SET CACHE_SIZE=100000
+    db2 commit
+    ```
 
 ### Install init-container Helm chart
 
