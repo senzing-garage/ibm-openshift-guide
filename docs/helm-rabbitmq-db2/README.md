@@ -43,6 +43,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Install Senzing license](#install-senzing-license)
     1. [Get Senzing schema sql for Db2](#get-senzing-schema-sql-for-db2)
     1. [Create Senzing schema on Db2](#create-senzing-schema-on-db2)
+    1. [Database tuning](#database-tuning)
     1. [Install init-container Helm chart](#install-init-container-helm-chart)
     1. [Install stream-loader Helm chart](#install-stream-loader-helm-chart)
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
