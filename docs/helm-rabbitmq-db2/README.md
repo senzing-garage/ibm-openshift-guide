@@ -161,7 +161,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 ### Create custom helm values files
 
-:thinking: In this step Helm template files are populated with actual values.
+:thinking: In this step, Helm template files are populated with actual values.
 There are two methods of accomplishing this.
 Only one method needs to be performed.
 
@@ -179,6 +179,7 @@ Only one method needs to be performed.
     ```
 
 1. **Method #2:** Copy and manually modify files method.
+   Example:
 
     ```console
     export HELM_VALUES_DIR=${GIT_REPOSITORY_DIR}/helm-values
@@ -197,7 +198,7 @@ Only one method needs to be performed.
 
 ### Create custom kubernetes configuration files
 
-:thinking: In this step Kubernetes template files are populated with actual values.
+:thinking: In this step, Kubernetes template files are populated with actual values.
 There are two methods of accomplishing this.
 Only one method needs to be performed.
 
@@ -215,6 +216,7 @@ Only one method needs to be performed.
     ```
 
 1. **Method #2:** Copy and manually modify files method.
+   Example:
 
     ```console
     export KUBERNETES_DIR=${GIT_REPOSITORY_DIR}/kubernetes
@@ -245,7 +247,7 @@ Only one method needs to be performed.
     oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     ```
 
-1. Optional: Review persistent volumes and claims.
+1. :thinking: **Optional:** Review persistent volumes and claims.
    Example:
 
     ```console
@@ -271,7 +273,7 @@ Only one method needs to be performed.
     helm repo update
     ```
 
-1. Optional: Review repositories
+1. :thinking: **Optional:** Review repositories
 
     ```console
     helm repo list
