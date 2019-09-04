@@ -1,4 +1,4 @@
-# kubernetes-demo-helm-rabbitmq-db2
+# ibm-openshift-guide-helm-rabbitmq-db2
 
 ## Overview
 
@@ -87,16 +87,11 @@ The Git repository has files that will be used in the `helm install --values` pa
     ```console
     export GIT_ACCOUNT=senzing
     export GIT_REPOSITORY=ibm-openshift-guide
-    ```
-
-1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
-
-1. After the Git repository has been cloned, be sure the following environment variables are set:
-
-    ```console
     export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
     export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
     ```
+
+1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
 
 ## Demonstrate
 
@@ -188,7 +183,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     cp ${GIT_REPOSITORY_DIR}/helm-values-templates/* ${HELM_VALUES_DIR}
     ```
 
-   :pencil2: Edit files in ${HELM_VALUES_DIR} replacing the following variables with actual values.
+    :pencil2: Edit files in ${HELM_VALUES_DIR} replacing the following variables with actual values.
 
     1. `${DEMO_PREFIX}`
     1. `${DOCKER_REGISTRY_SECRET}`
@@ -274,6 +269,36 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 1. Reference: [helm repo](https://helm.sh/docs/helm/#helm-repo)
 
+### Deploy Senzing RPM
+
+This deployment initializes the Persistent Volume with Senzing code and data.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install \
+      --name ${DEMO_PREFIX}-senzing-yum \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/senzing-yum.yaml \
+      senzing/senzing-yum
+    ```
+
+### Install IBM Db2 Driver
+
+This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install \
+      --name ${DEMO_PREFIX}-ibm-db2-driver-installer \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/ibm-db2-driver-installer.yaml \
+      senzing/ibm-db2-driver-installer
+    ```
+
 ### Install RabbitMQ Helm chart
 
 This deployment creates a RabbitMQ service.
@@ -313,36 +338,6 @@ The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/mock-data-generator-rabbitmq.yaml \
       senzing/senzing-mock-data-generator
-    ```
-
-### Deploy Senzing RPM
-
-This deployment initializes the Persistent Volume with Senzing code and data.
-
-1. Install chart.
-   Example:
-
-    ```console
-    helm install \
-      --name ${DEMO_PREFIX}-senzing-yum \
-      --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/senzing-yum.yaml \
-      senzing/senzing-yum
-    ```
-
-### Install IBM Db2 Driver
-
-This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
-
-1. Install chart.
-   Example:
-
-    ```console
-    helm install \
-      --name ${DEMO_PREFIX}-ibm-db2-driver-installer \
-      --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/ibm-db2-driver-installer.yaml \
-      senzing/ibm-db2-driver-installer
     ```
 
 ### Install senzing-base Helm Chart
@@ -512,7 +507,7 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
       --watch
     ```
 
-1. To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server)
+1. To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server).
 
 ### Install senzing-entity-search-web-app Helm chart
 
@@ -529,7 +524,16 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
       senzing/senzing-entity-search-web-app
     ```
 
-1. To view Senzing Entity Search WebApp, see [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp)
+1. Wait until Deployment has completed.
+   Example:
+
+    ```console
+    oc get pods \
+      --namespace ${DEMO_NAMESPACE} \
+      --watch
+    ```
+
+1. To view Senzing Entity Search WebApp, see [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp).
 
 ### View data
 
