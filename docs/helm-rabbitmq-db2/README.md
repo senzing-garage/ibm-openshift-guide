@@ -49,6 +49,8 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
     1. [Install senzing-entity-search-web-app Helm chart](#install-senzing-entity-search-web-app-helm-chart)
     1. [View data](#view-data)
+1. [Troubleshooting](#troubleshooting)
+    1. [Install senzing-debug Helm chart](#install-senzing-debug-helm-chart)
 1. [Cleanup](#cleanup)
     1. [Delete everything in project](#delete-everything-in-project)
     1. [Delete database tables](#delete-database-tables)
@@ -685,6 +687,51 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
    The [demonstration](https://github.com/Senzing/knowledge-base/blob/master/demonstrations/docker-compose-web-app.md)
    instructions will give a tour of the Senzing web app.
 
+## Troubleshooting
+
+### Install senzing-debug Helm chart
+
+This deployment provides a pod that can be used to view Persistent Volumes.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install \
+      --name ${DEMO_PREFIX}-senzing-debug \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/senzing-debug.yaml \
+       senzing/senzing-debug
+    ```
+
+1. Wait for pod to run.
+   Example:
+
+    ```console
+    oc get pods \
+      --namespace ${DEMO_NAMESPACE} \
+      --watch
+    ```
+
+1. Find pod name.
+   Example:
+
+    ```console
+    export SENZING_DEBUG_POD_NAME=$(oc get pods \
+      --namespace ${DEMO_NAMESPACE} \
+      --output jsonpath="{.items[0].metadata.name}" \
+      --selector "app.kubernetes.io/name=senzing-debug, \
+                  app.kubernetes.io/instance=${DEMO_PREFIX}-senzing-debug" \
+      )
+    ```
+
+1. Log into debug pod.
+   Example:
+
+    ```console
+    oc exec -it --namespace ${DEMO_NAMESPACE} ${SENZING_DEBUG_POD_NAME} -- /bin/bash
+    ```
+
 ## Cleanup
 
 ### Delete everything in project
@@ -701,6 +748,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     helm delete --purge ${DEMO_PREFIX}-senzing-yum
     helm delete --purge ${DEMO_PREFIX}-senzing-mock-data-generator
     helm delete --purge ${DEMO_PREFIX}-rabbitmq
+    helm delete --purge ${DEMO_PREFIX}-senzing-debug
     helm repo remove senzing
     oc delete -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     oc delete -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
