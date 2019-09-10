@@ -45,6 +45,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Create Senzing schema on Db2](#create-senzing-schema-on-db2)
     1. [Database tuning](#database-tuning)
     1. [Install init-container Helm chart](#install-init-container-helm-chart)
+    1. [Install configurator Helm Chart](#install-configurator-helm-chart)
     1. [Install stream-loader Helm chart](#install-stream-loader-helm-chart)
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
     1. [Install senzing-entity-search-web-app Helm chart](#install-senzing-entity-search-web-app-helm-chart)
@@ -651,6 +652,8 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 
 #### View RabbitMQ
 
+FIXME:
+
 1. In a separate terminal window, port forward to local machine.
    Example:
 
@@ -666,6 +669,8 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
         1. See `helm-values/rabbitmq.yaml` for Username and password.
 
 #### View Senzing Configurator
+
+FIXME:
 
 1. In a separate terminal window, port forward to local machine.
    Example:
@@ -692,6 +697,8 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 
 #### View Senzing API Server
 
+FIXME:
+
 1. In a separate terminal window, port forward to local machine.
    Example:
 
@@ -714,6 +721,8 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     ```
 
 #### View Senzing Entity Search WebApp
+
+FIXME:
 
 1. In a separate terminal window, port forward to local machine.
    Example:
@@ -784,6 +793,7 @@ This deployment provides a pod that can be used to view Persistent Volumes.
     helm delete --purge ${DEMO_PREFIX}-senzing-entity-search-web-app
     helm delete --purge ${DEMO_PREFIX}-senzing-api-server
     helm delete --purge ${DEMO_PREFIX}-senzing-stream-loader
+    helm delete --purge ${DEMO_PREFIX}-senzing-configurator
     helm delete --purge ${DEMO_PREFIX}-senzing-init-container
     helm delete --purge ${DEMO_PREFIX}-senzing-base
     helm delete --purge ${DEMO_PREFIX}-ibm-db2-driver-installer
