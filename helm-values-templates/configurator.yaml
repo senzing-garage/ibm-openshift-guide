@@ -5,7 +5,6 @@ imagePullSecrets:
   - name: ${DOCKER_REGISTRY_SECRET}
 
 senzing:
-  bindAddr: all
-  concurrency: 8
-  iniFile: /etc/opt/senzing/G2Module.ini
+  databaseUrl: "${SENZING_DATABASE_URL}"
   persistentVolumeClaim: senzing-persistent-volume-claim
+  subcommand: service
