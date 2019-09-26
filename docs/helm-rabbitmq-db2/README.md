@@ -278,7 +278,8 @@ Only one method needs to be performed.
     helm repo update
     ```
 
-1. :thinking: **Optional:** Review repositories.
+1. :thinking: **Optional:**
+   Review repositories.
    Example:
 
     ```console
