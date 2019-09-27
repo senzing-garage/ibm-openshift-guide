@@ -101,7 +101,7 @@ The Git repository has files that will be used in the `helm install --values` pa
 
 The following instructions assume that a database has been created for use by Senzing.
 The database connection information will be needed for the
-"[Database connection information](#database-connection-information)" step.
+"[Database connection information](#database-connection-information)" step below.
 
 ## Demonstrate
 
