@@ -461,7 +461,7 @@ The step copies the SQL file used to create the Senzing database schema onto the
     ```console
     oc cp \
       --namespace ${DEMO_NAMESPACE} \
-      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/g2/resources/schema/g2core-schema-db2-create.sql \
+      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/senzing-g2/resources/schema/g2core-schema-db2-create.sql \
       ${SENZING_LOCAL_SQL_PATH}
     ```
 
