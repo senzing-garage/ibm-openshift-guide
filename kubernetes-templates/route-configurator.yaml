@@ -1,0 +1,33 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: '2019-09-10T14:43:46Z'
+  labels:
+    app.kubernetes.io/instance: my-senzing-configurator
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: senzing-configurator
+    app.kubernetes.io/version: '1.0'
+    helm.sh/chart: senzing-configurator-0.1.0
+  name: myconfigurator
+  namespace: zen
+  resourceVersion: '22435832'
+  selfLink: /apis/route.openshift.io/v1/namespaces/zen/routes/myconfigurator
+  uid: 64cafb76-d3d9-11e9-a86b-005056b027a0
+spec:
+  host: myconfigurator
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: my-senzing-configurator
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+    - conditions:
+        - lastTransitionTime: '2019-09-10T14:43:46Z'
+          status: 'True'
+          type: Admitted
+      host: myconfigurator
+      routerName: router
+      wildcardPolicy: None

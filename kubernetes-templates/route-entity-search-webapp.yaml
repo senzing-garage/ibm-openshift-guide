@@ -1,0 +1,33 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: '2019-09-04T19:37:05Z'
+  labels:
+    app.kubernetes.io/instance: my-senzing-entity-search-web-app
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: senzing-entity-search-web-app
+    app.kubernetes.io/version: '1.0'
+    helm.sh/chart: senzing-entity-search-web-app-0.1.0
+  name: mysenzingweb
+  namespace: zen
+  resourceVersion: '21257020'
+  selfLink: /apis/route.openshift.io/v1/namespaces/zen/routes/mysenzingweb
+  uid: 606b7303-cf4b-11e9-a86b-005056b027a0
+spec:
+  host: mysenzingweb
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: my-senzing-entity-search-web-app
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+    - conditions:
+        - lastTransitionTime: '2019-09-04T19:37:05Z'
+          status: 'True'
+          type: Admitted
+      host: mysenzingweb
+      routerName: router
+      wildcardPolicy: None
