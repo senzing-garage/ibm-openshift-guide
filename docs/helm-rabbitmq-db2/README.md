@@ -467,7 +467,7 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 ### Create Senzing schema on Db2
 
-1. Copy `g2core-schema-db2-create.sq` to FIXME:
+1. Copy `g2core-schema-db2-create.sql` to FIXME:
    Example:
 
    ```console
