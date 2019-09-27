@@ -432,7 +432,7 @@ and this step may be skipped.
     oc cp \
       --namespace ${DEMO_NAMESPACE} \
       ${G2_LICENSE_PATH} \
-      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/etc/opt/senzing/g2.lic
+      ${DEMO_NAMESPACE}/${SENZING_BASE_POD_NAME}:/opt/senzing/senzing-etc/g2.lic
     ```
 
 1. Note: `/etc/opt/senzing` is attached as a Kubernetes Persistent Volume Claim (PVC),
