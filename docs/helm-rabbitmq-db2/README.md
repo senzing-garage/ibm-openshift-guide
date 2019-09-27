@@ -97,6 +97,12 @@ The Git repository has files that will be used in the `helm install --values` pa
 
 1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
 
+### Database
+
+The following instructions assume that a database has been created for use by Senzing.
+The database connection information will be needed for the
+"[Database connection information](#database-connection-information)" step.
+
 ## Demonstrate
 
 ### EULA
