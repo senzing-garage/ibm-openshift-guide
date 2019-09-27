@@ -1,17 +1,13 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  creationTimestamp: '2019-09-06T16:36:00Z'
   labels:
     app: rabbitmq
     chart: rabbitmq-6.4.3
     heritage: Tiller
     release: my-rabbitmq
   name: myrabbitmq
-  namespace: zen
-  resourceVersion: '21638726'
-  selfLink: /apis/route.openshift.io/v1/namespaces/zen/routes/myrabbitmq
-  uid: 6935b2ec-d0c4-11e9-a86b-005056b027a0
+  namespace: ${DEMO_NAMESPACE}
 spec:
   host: myrabbitmq
   port:
@@ -21,12 +17,3 @@ spec:
     name: my-rabbitmq
     weight: 100
   wildcardPolicy: None
-status:
-  ingress:
-    - conditions:
-        - lastTransitionTime: '2019-09-06T16:36:00Z'
-          status: 'True'
-          type: Admitted
-      host: myrabbitmq
-      routerName: router
-      wildcardPolicy: None
