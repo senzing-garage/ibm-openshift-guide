@@ -4,6 +4,13 @@ image:
 imagePullSecrets:
   - name: ${DOCKER_REGISTRY_SECRET}
 
+ingress:
+  enabled: true
+  hosts:
+    - host: senzing-api.local
+      paths:
+        - /
+
 senzing:
   bindAddr: all
   concurrency: 8
