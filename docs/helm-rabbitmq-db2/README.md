@@ -137,6 +137,13 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 1. Set environment variables listed in "[Clone repository](#clone-repository)".
 
+1. :thinking: **Optional:** If using Transport Layer Security (TLS),
+   then set the following environment variable:
+
+    ```console
+    export HELM_TLS="--tls"
+    ```
+
 ### Database connection information
 
 1. Craft the `SENZING_DATABASE_URL`.  It will be used in "helm values" files.
@@ -302,7 +309,7 @@ This deployment initializes the Persistent Volume with Senzing code and data.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-yum \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-yum.yaml \
@@ -317,7 +324,7 @@ This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-ibm-db2-driver-installer \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/ibm-db2-driver-installer.yaml \
@@ -332,7 +339,7 @@ This deployment creates a RabbitMQ service.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-rabbitmq \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/rabbitmq.yaml \
@@ -358,7 +365,7 @@ The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-mock-data-generator \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/mock-data-generator-rabbitmq.yaml \
@@ -374,7 +381,7 @@ in later steps.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-base \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-base.yaml \
@@ -543,7 +550,7 @@ The init-container creates files from templates and initializes the G2 database.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-init-container \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/init-container-db2.yaml \
@@ -567,7 +574,7 @@ The Senzing Configurator is a micro-service for changing Senzing configuration.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-configurator \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/configurator.yaml \
@@ -584,7 +591,7 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-stream-loader \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/stream-loader-rabbitmq-db2.yaml \
@@ -599,7 +606,7 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-api-server \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-api-server.yaml \
@@ -625,7 +632,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-entity-search-web-app \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/entity-search-web-app.yaml \
@@ -753,7 +760,7 @@ This deployment provides a pod that can be used to view Persistent Volumes.
    Example:
 
     ```console
-    helm install \
+    helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-debug \
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-debug.yaml \
