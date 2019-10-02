@@ -370,6 +370,13 @@ This deployment creates a RabbitMQ service.
       stable/rabbitmq
     ```
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_PREFIX}-rabbitmq
+    ```
+
 1. Wait for pods to run.
    Example:
 
@@ -410,6 +417,13 @@ in later steps.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-base.yaml \
        senzing/senzing-base
+    ```
+
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_PREFIX}-senzing-base
     ```
 
 1. Find pod name.
@@ -789,6 +803,13 @@ This deployment provides a pod that can be used to view Persistent Volumes.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-debug.yaml \
        senzing/senzing-debug
+    ```
+
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_PREFIX}-senzing-debug
     ```
 
 1. Wait for pod to run.
