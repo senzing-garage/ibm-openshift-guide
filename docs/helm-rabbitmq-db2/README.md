@@ -34,6 +34,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Create custom helm values files](#create-custom-helm-values-files)
     1. [Create custom kubernetes configuration files](#create-custom-kubernetes-configuration-files)
     1. [Create persistent volume](#create-persistent-volume)
+    1. [Create Service Context Constraint](#create-service-context-constraint)
     1. [Add helm repositories](#add-helm-repositories)
     1. [Deploy Senzing RPM](#deploy-senzing-rpm)
     1. [Install IBM Db2 Driver](#install-ibm-db2-driver)
@@ -275,6 +276,15 @@ Only one method needs to be performed.
       --namespace ${DEMO_NAMESPACE}
     ```
 
+### Create Service Context Constraint
+
+1. Create Security Constraint Context.
+   Example:
+
+    ```console
+    oc create -f ${KUBERNETES_DIR}/security-context-constraint.yaml
+    ```
+
 ### Add helm repositories
 
 1. Add Senzing repository.
@@ -316,6 +326,13 @@ This deployment initializes the Persistent Volume with Senzing code and data.
       senzing/senzing-yum
     ```
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_NAMESPACE}-senzing-yum
+    ```
+
 ### Install IBM Db2 Driver
 
 This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
@@ -329,6 +346,13 @@ This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/ibm-db2-driver-installer.yaml \
       senzing/ibm-db2-driver-installer
+    ```
+
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_NAMESPACE}-ibm-db2-driver-installer
     ```
 
 ### Install RabbitMQ Helm chart
