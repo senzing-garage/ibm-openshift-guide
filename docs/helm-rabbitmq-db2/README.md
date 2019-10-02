@@ -595,6 +595,13 @@ The init-container creates files from templates and initializes the G2 database.
       senzing/senzing-init-container
     ```
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_PREFIX}-senzing-init-container
+    ```
+
 1. Wait for pods to run.
    Example:
 
