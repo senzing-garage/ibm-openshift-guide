@@ -330,7 +330,7 @@ This deployment initializes the Persistent Volume with Senzing code and data.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user FIXME: -z ${DEMO_NAMESPACE}-senzing-yum
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_PREFIX}-senzing-yum
     ```
 
 ### Install IBM Db2 Driver
@@ -352,7 +352,7 @@ This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user FIXME: -z ${DEMO_NAMESPACE}-ibm-db2-driver-installer
+    oc adm policy add-scc-to-user FIXME: -z ${DEMO_PREFIX}-ibm-db2-driver-installer
     ```
 
 ### Install RabbitMQ Helm chart
