@@ -26,7 +26,11 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
     1. [Cloud Pak for Data](#cloud-pak-for-data)
+    1. [Hardware Requirements](#hardware-requirements)
+    1. [Software Requirements](#software-requirements)
+    1. [Security Requirements](#security-requirements)
     1. [Clone repository](#clone-repository)
+    1. [Database](#database)
 1. [Demonstrate](#demonstrate)
     1. [EULA](#eula)
     1. [Set environment variables](#set-environment-variables)
@@ -82,6 +86,28 @@ This repository assumes a working knowledge of:
 ### Cloud Pak for Data
 
 1. See [Installing Cloud Pak for Data on Red Hat OpenShift (without IBM Cloud Private)](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/install/openshift-noicp.html).
+
+### Hardware Requirements
+
+1. Minimum CPU: FIXME:
+1. Minimum Memory:  FIXME:
+1. Minimum Storage:  FIXME:
+1. Minimum Worker/Master Nodes:  FIXME:
+1. Number of Pods/Replicas:  FIXME:
+
+### Software Requirements
+
+1. Storage Software requirements:
+    1. Portworx/GlusterFS/NFS FIXME:
+1. OS/Virtualizationrequirements: FIXME:
+1. Network Virtualization requirements: FIXME:
+1. Security Software requirements: FIXME:
+1. Third party Software requirements: FIXME:
+1. Specific version dependencies: FIXME:
+
+### Security Requirements
+
+1. Permission requirements: FIXME:
 
 ### Clone repository
 
@@ -246,6 +272,45 @@ Only one method needs to be performed.
     :pencil2: Edit files in ${KUBERNETES_DIR} replacing the following variables with actual values.
 
     1. `${DEMO_NAMESPACE}`
+
+### Log into OpenShift
+
+1. :pencil2: Set environment variables.
+   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
+   Example:
+
+    ```console
+    export OC_USERNAME=my-username
+    export OC_PASSWORD=my-password
+    export OC_URL=https://xxxx:8443
+    ```
+
+1. Login.
+   Example:
+
+   ```console
+   oc login -u ${OC_USERNAME} -p ${OC_PASSWORD} ${OC_URL}
+   ```
+
+### Create OpenShift project
+
+1. :pencil2: Set environment variables.
+   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
+   Example:
+
+    ```console
+    export OC_DESCRIPTION="My descriptions..."
+    export OC_DISPLAY_NAME="My project"
+    ```
+
+1. Login.
+   Example:
+
+    ```console
+    oc new-project ${DEMO_NAMESPACE} \
+      --description=${OC_DESCRIPTION} \
+      --display-name=${OC_DISPLAY_NAME}
+    ```
 
 ### Create persistent volume
 
