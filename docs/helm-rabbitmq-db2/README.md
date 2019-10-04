@@ -781,7 +781,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     echo ${SENZING_INFRA_NODE}
     ```
 
-1. Add a line to `/etc/hosts` file
+1. Add a line like the following example to `/etc/hosts` file
    using the value of `${SENZING_INFRA_NODE}` instead of "10.10.10.10".
    Example:
 
@@ -834,7 +834,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
         curl -X GET ${SENZING_API_SERVICE}/entities/1
         ```
 
-   1. From [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api/issue-33.dockter.1/senzing-rest-api.yaml).
+   1. From [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api/master/senzing-rest-api.yaml).
 
 #### View Senzing Entity Search WebApp
 
