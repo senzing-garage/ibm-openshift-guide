@@ -921,22 +921,22 @@ This deployment provides a pod that can be used to view Persistent Volumes.
 1. Example:
 
     ```console
-    helm delete --purge ${DEMO_PREFIX}-senzing-entity-search-web-app
-    helm delete --purge ${DEMO_PREFIX}-senzing-api-server
-    helm delete --purge ${DEMO_PREFIX}-senzing-stream-loader
-    helm delete --purge ${DEMO_PREFIX}-senzing-configurator
-    helm delete --purge ${DEMO_PREFIX}-senzing-init-container
-    helm delete --purge ${DEMO_PREFIX}-senzing-base
-    helm delete --purge ${DEMO_PREFIX}-ibm-db2-driver-installer
-    helm delete --purge ${DEMO_PREFIX}-senzing-yum
-    helm delete --purge ${DEMO_PREFIX}-senzing-mock-data-generator
-    helm delete --purge ${DEMO_PREFIX}-rabbitmq
-    helm delete --purge ${DEMO_PREFIX}-senzing-debug
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-entity-search-web-app
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-api-server
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-stream-loader
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-configurator
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-init-container
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-base
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-ibm-db2-driver-installer
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-yum
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-mock-data-generator
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-rabbitmq
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-debug
     helm repo remove senzing
-    oc delete -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
-    oc delete -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
-    oc delete -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
-    oc delete -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     ```
 
 ### Delete database tables
