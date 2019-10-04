@@ -464,7 +464,7 @@ The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-mock-data-generator \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/mock-data-generator-rabbitmq.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-mock-data-generator-rabbitmq.yaml \
       senzing/senzing-mock-data-generator
     ```
 
@@ -656,7 +656,7 @@ The init-container creates files from templates and initializes the G2 database.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-init-container \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/init-container-db2.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-init-container-db2.yaml \
       senzing/senzing-init-container
     ```
 
@@ -687,7 +687,7 @@ The Senzing Configurator is a micro-service for changing Senzing configuration.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-configurator \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/configurator.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-configurator.yaml \
       senzing/senzing-configurator
     ```
 
@@ -704,7 +704,7 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-stream-loader \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/stream-loader-rabbitmq-db2.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-stream-loader-rabbitmq-db2.yaml \
       senzing/senzing-stream-loader
     ```
 
@@ -745,7 +745,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-entity-search-web-app \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/entity-search-web-app.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-entity-search-web-app.yaml \
       senzing/senzing-entity-search-web-app
     ```
 
