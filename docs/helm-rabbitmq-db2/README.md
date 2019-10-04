@@ -766,20 +766,23 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 
 1. Username and password for the following sites are the values seen in the corresponding "values" YAML file located in
    [helm-values-templates](../helm-values-templates).
-1. :pencil2: When using a separate terminal window in each of the examples below, set environment variables.
-   Example:
-
-    ```console
-    export DEMO_PREFIX=my
-    export DEMO_NAMESPACE=zen
-    ```
 
 #### Update hosts file
 
-1. Determine the IP address of the OpenShift "infra" node.
+1. FIXME: (This probably doesn't work, may need to "ping" the node name)
+   Determine the IP address of the OpenShift "infra" node.
+   Example:
+
+    ```console
+    export SENZING_INFRA_NODE=$(oc get nodes \
+      --output jsonpath="{.items[0].metadata.name}" \
+      --selector "node-role.kubernetes.io/infra=true"
+    )
+    echo ${SENZING_INFRA_NODE}
+    ```
 
 1. Add a line to `/etc/hosts` file
-   using the "infra" node IP address instead of "10.10.10.10".
+   using the value of `${SENZING_INFRA_NODE}` instead of "10.10.10.10".
    Example:
 
     ```console
@@ -790,11 +793,11 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 
 1. RabbitMQ will be viewable at [rabbitmq.local](http://rabbitmq.local).
     1. Login
-        1. See `helm-values/rabbitmq.yaml` for Username and password.
+        1. See [helm-values/rabbitmq.yaml](../../helm-values/rabbitmq.yaml) for Username and password.
 
 #### View Senzing Configurator
 
-1. Senzing Configurator be viewable at [senzing-configurator.local/datasources](http://senzing-configurator.local/datasources).
+1. Senzing Configurator will be viewable at [senzing-configurator.local/datasources](http://senzing-configurator.local/datasources).
 
 1. Make HTTP calls via `curl`.
    Example:
