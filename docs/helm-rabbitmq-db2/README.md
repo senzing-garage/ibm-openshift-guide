@@ -774,43 +774,33 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
     export DEMO_NAMESPACE=zen
     ```
 
-#### View RabbitMQ
+#### Update hosts file
 
-FIXME:
+1. Determine the IP address of the OpenShift "infra" node.
 
-1. In a separate terminal window, port forward to local machine.
+1. Add a line to `/etc/hosts` file
+   using the "infra" node IP address instead of "10.10.10.10".
    Example:
 
     ```console
-    oc port-forward \
-      --address 0.0.0.0 \
-      --namespace ${DEMO_NAMESPACE} \
-      svc/${DEMO_PREFIX}-rabbitmq 15672:15672
+    10.10.10.10 rabbitmq.local senzing-api.local senzing-configurator.local senzing-entity-search.local
     ```
 
-1. RabbitMQ will be viewable at [localhost:15672](http://localhost:15672).
+#### View RabbitMQ
+
+1. RabbitMQ will be viewable at [rabbitmq.local](http://rabbitmq.local).
     1. Login
         1. See `helm-values/rabbitmq.yaml` for Username and password.
 
 #### View Senzing Configurator
 
-FIXME:
-
-1. In a separate terminal window, port forward to local machine.
-   Example:
-
-    ```console
-    oc port-forward \
-      --address 0.0.0.0 \
-      --namespace ${DEMO_NAMESPACE} \
-      svc/${DEMO_PREFIX}-senzing-configurator 5001:5000
-    ```
+1. Senzing Configurator be viewable at [senzing-configurator.local/datasources](http://senzing-configurator.local/datasources).
 
 1. Make HTTP calls via `curl`.
    Example:
 
     ```console
-    export SENZING_CONFIGURATOR_SERVICE=http://localhost:5001
+    export SENZING_CONFIGURATOR_SERVICE=http://senzing-configurator.local
 
     curl -X GET ${SENZING_CONFIGURATOR_SERVICE}/datasources
     curl -X POST \
@@ -821,44 +811,31 @@ FIXME:
 
 #### View Senzing API Server
 
-FIXME:
+1. View results from Senzing REST API server.
+   The server supports the
+   [Senzing REST API](https://github.com/Senzing/senzing-rest-api).
 
-1. In a separate terminal window, port forward to local machine.
-   Example:
+   1. From a web browser.
+      Examples:
+      1. [senzing-api.local/heartbeat](http://senzing-api.local/heartbeat)
+      1. [senzing-api.local/license](http://senzing-api.local/license)
+      1. [senzing-api.local/entities/1](http://senzing-api.local/entities/1)
+   1. From `curl`.
+      Examples:
 
-    ```console
-    oc port-forward \
-      --address 0.0.0.0 \
-      --namespace ${DEMO_NAMESPACE} \
-      svc/${DEMO_PREFIX}-senzing-api-server 8889:8080
-    ```
+        ```console
+        export SENZING_API_SERVICE=http://senzing-api.local
 
-1. Make HTTP calls via `curl`.
-   Example:
+        curl -X GET ${SENZING_API_SERVICE}/heartbeat
+        curl -X GET ${SENZING_API_SERVICE}/license
+        curl -X GET ${SENZING_API_SERVICE}/entities/1
+        ```
 
-    ```console
-    export SENZING_API_SERVICE=http://localhost:8889
-
-    curl -X GET ${SENZING_API_SERVICE}/heartbeat
-    curl -X GET ${SENZING_API_SERVICE}/license
-    curl -X GET ${SENZING_API_SERVICE}/entities/1
-    ```
+   1. From [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api/issue-33.dockter.1/senzing-rest-api.yaml).
 
 #### View Senzing Entity Search WebApp
 
-FIXME:
-
-1. In a separate terminal window, port forward to local machine.
-   Example:
-
-    ```console
-    oc port-forward \
-      --address 0.0.0.0 \
-      --namespace ${DEMO_NAMESPACE} \
-      svc/${DEMO_PREFIX}-senzing-entity-search-web-app 8888:80
-    ```
-
-1. Senzing Entity Search WebApp will be viewable at [localhost:8888](http://localhost:8888).
+1. Senzing Entity Search WebApp will be viewable at [senzing-entity-search.local](http://senzing-entity-search.local).
    The [demonstration](https://github.com/Senzing/knowledge-base/blob/master/demonstrations/docker-compose-web-app.md)
    instructions will give a tour of the Senzing web app.
 
