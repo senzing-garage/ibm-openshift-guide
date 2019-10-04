@@ -37,21 +37,23 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Database connection information](#database-connection-information)
     1. [Create custom helm values files](#create-custom-helm-values-files)
     1. [Create custom kubernetes configuration files](#create-custom-kubernetes-configuration-files)
+    1. [Log into OpenShift](#log-into-openshift)
+    1. [Create OpenShift project](#create-openshift-project)
     1. [Create persistent volume](#create-persistent-volume)
     1. [Create Service Context Constraint](#create-service-context-constraint)
     1. [Add helm repositories](#add-helm-repositories)
     1. [Deploy Senzing RPM](#deploy-senzing-rpm)
     1. [Install IBM Db2 Driver](#install-ibm-db2-driver)
     1. [Install RabbitMQ Helm chart](#install-rabbitmq-helm-chart)
-    1. [Install mock-data-generator Helm chart](#install-mock-data-generator-helm-chart)
+    1. [Install senzing-mock-data-generator Helm chart](#install-senzing-mock-data-generator-helm-chart)
     1. [Install senzing-base Helm chart](#install-senzing-base-helm-chart)
     1. [Install Senzing license](#install-senzing-license)
     1. [Get Senzing schema sql for Db2](#get-senzing-schema-sql-for-db2)
     1. [Create Senzing schema on Db2](#create-senzing-schema-on-db2)
     1. [Database tuning](#database-tuning)
-    1. [Install init-container Helm chart](#install-init-container-helm-chart)
-    1. [Install configurator Helm Chart](#install-configurator-helm-chart)
-    1. [Install stream-loader Helm chart](#install-stream-loader-helm-chart)
+    1. [Install senzing-init-container Helm chart](#install-senzing-init-container-helm-chart)
+    1. [Install senzing-configurator Helm Chart](#install-senzing-configurator-helm-chart)
+    1. [Install senzing-stream-loader Helm chart](#install-senzing-stream-loader-helm-chart)
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
     1. [Install senzing-entity-search-web-app Helm chart](#install-senzing-entity-search-web-app-helm-chart)
     1. [View data](#view-data)
@@ -453,7 +455,7 @@ This deployment creates a RabbitMQ service.
 
 1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
 
-### Install mock-data-generator Helm chart
+### Install senzing-mock-data-generator Helm chart
 
 The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ.
 
@@ -645,7 +647,7 @@ The step copies the SQL file used to create the Senzing database schema onto the
     db2 commit
     ```
 
-### Install init-container Helm chart
+### Install senzing-init-container Helm chart
 
 The init-container creates files from templates and initializes the G2 database.
 
@@ -676,7 +678,7 @@ The init-container creates files from templates and initializes the G2 database.
       --watch
     ```
 
-### Install configurator Helm chart
+### Install senzing-configurator Helm chart
 
 The Senzing Configurator is a micro-service for changing Senzing configuration.
 
@@ -693,7 +695,7 @@ The Senzing Configurator is a micro-service for changing Senzing configuration.
 
 1. To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
 
-### Install stream-loader Helm chart
+### Install senzing-stream-loader Helm chart
 
 The stream loader pulls messages from RabbitMQ and sends them to Senzing.
 
