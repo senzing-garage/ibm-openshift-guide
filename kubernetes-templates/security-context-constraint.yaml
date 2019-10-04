@@ -33,8 +33,6 @@ volumes:
 - projected
 - secret
 
------------------------------
-
 # allowHostDirVolumePlugin: false
 # allowHostIPC: false
 # allowHostNetwork: false
