@@ -317,10 +317,23 @@ Only one method needs to be performed.
 
 ### Create persistent volume
 
-:thinking: **Optional:** Persistent volumes may already be created.
-If persistent volumes exist, these steps may be skipped.
+FIXME:
 
-1. :thinking: If needed, create persistent volumes.
+:thinking:
+To create persistent volume claims (PVCs) below,
+a persistent volume (PV) or storage class must first exist.
+If a persistent volume or a storage class already exists, proceed to
+[Create persistent volume claims](#create-persistent-volume-claims).
+
+There are many ways of creating a Persistent Volume.
+The following is a single example of creating a Persistent Volume
+that can be referred to by `volumeName`.
+
+1. :pencil2: Review and modify as needed the contents of:
+    1. ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
+    1. ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
+
+1. If needed, create persistent volumes.
    Example:
 
     ```console
