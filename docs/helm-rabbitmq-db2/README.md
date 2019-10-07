@@ -40,6 +40,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Log into OpenShift](#log-into-openshift)
     1. [Create OpenShift project](#create-openshift-project)
     1. [Create persistent volume](#create-persistent-volume)
+    1. [Create persistent volume claims](#create-persistent-volume-claims)
     1. [Create Service Context Constraint](#create-service-context-constraint)
     1. [Add helm repositories](#add-helm-repositories)
     1. [Deploy Senzing RPM](#deploy-senzing-rpm)
@@ -316,20 +317,15 @@ Only one method needs to be performed.
 
 ### Create persistent volume
 
-1. Create persistent volumes.
+:thinking: **Optional:** Persistent volumes may already be created.
+If persistent volumes exist, these steps may be skipped.
+
+1. :thinking: If needed, create persistent volumes.
    Example:
 
     ```console
     oc create -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     oc create -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
-    ```
-
-1. Create persistent volume claims.
-   Example:
-
-    ```console
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     ```
 
 1. :thinking: **Optional:** Review persistent volumes and claims.
@@ -338,7 +334,34 @@ Only one method needs to be performed.
     ```console
     oc get persistentvolumes \
       --namespace ${DEMO_NAMESPACE}
+    ```
 
+### Create persistent volume claims
+
+:thinking: There are multiple ways of creating a persistent volume claim (PVC).
+The following are examples of how to create a PVC.
+Only one method of creating PVCs is needed.
+
+1. **Method #1** - Create persistent volume claims from `volumeName`.
+   Example:
+
+    ```console
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
+    ```
+
+1. **Method #2** - Create persistent volume claims from `storageClassName`.
+   Example:
+
+    ```console
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
+    ```
+
+1. :thinking: **Optional:** Review persistent volumes and claims.
+   Example:
+
+    ```console
     oc get persistentvolumeClaims \
       --namespace ${DEMO_NAMESPACE}
     ```
