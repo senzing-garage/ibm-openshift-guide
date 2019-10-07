@@ -433,7 +433,9 @@ This deployment initializes the Persistent Volume with Senzing code and data.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user senzing-security-context-constraint -z ${DEMO_PREFIX}-senzing-yum
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint \
+      -z ${DEMO_PREFIX}-senzing-yum
     ```
 
 ### Install IBM Db2 Driver
@@ -455,7 +457,9 @@ This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user senzing-security-context-constraint -z ${DEMO_PREFIX}-ibm-db2-driver-installer
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint \
+      -z ${DEMO_PREFIX}-ibm-db2-driver-installer
     ```
 
 ### Install RabbitMQ Helm chart
@@ -477,7 +481,9 @@ This deployment creates a RabbitMQ service.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user senzing-security-context-constraint -z ${DEMO_PREFIX}-rabbitmq
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint \
+      -z ${DEMO_PREFIX}-rabbitmq
     ```
 
 1. Wait for pods to run.
@@ -526,7 +532,9 @@ in later steps.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user senzing-security-context-constraint -z ${DEMO_PREFIX}-senzing-base
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint \
+      -z ${DEMO_PREFIX}-senzing-base
     ```
 
 1. Find pod name.
@@ -702,7 +710,9 @@ The init-container creates files from templates and initializes the G2 database.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user senzing-security-context-constraint -z ${DEMO_PREFIX}-senzing-init-container
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint \
+      -z ${DEMO_PREFIX}-senzing-init-container
     ```
 
 1. Wait for pods to run.
@@ -899,7 +909,9 @@ This deployment provides a pod that can be used to view Persistent Volumes.
    Example:
 
     ```console
-    oc adm policy add-scc-to-user senzing-security-context-constraint -z ${DEMO_PREFIX}-senzing-debug
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint \
+      -z ${DEMO_PREFIX}-senzing-debug
     ```
 
 1. Wait for pod to run.
@@ -949,6 +961,7 @@ This deployment provides a pod that can be used to view Persistent Volumes.
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-rabbitmq
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-debug
     helm repo remove senzing
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/security-context-constraint.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
