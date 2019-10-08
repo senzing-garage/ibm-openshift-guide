@@ -358,14 +358,6 @@ The following are examples of how to create a PVC
 with `spec.storageClassName` and `spec.volumeName`.
 Only one method of creating PVCs is needed.
 
-1. Review and modify as needed the following files:
-    1. If using `spec.storageClassName`:
-        1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
-        1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
-    1. If using `spec.volumeName`:
-        1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
-        1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
-
 1. **Method #1** - Create persistent volume claims using `spec.storageClassName`.
 
     1. Review and modify as needed the following files:
