@@ -364,12 +364,13 @@ Only one method of creating PVCs is needed.
         1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
         1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
 
-   Example:
+    1. Create PVCs.
+       Example:
 
-    ```console
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
-    ```
+        ```console
+        oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
+        oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
+        ```
 
 1. **Method #2** - Create persistent volume claims using `spec.volumeName`.
 
@@ -377,12 +378,13 @@ Only one method of creating PVCs is needed.
         1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
         1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
 
-   Example:
+    1. Create PVCs.
+       Example:
 
-    ```console
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
-    ```
+        ```console
+        oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
+        oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
+        ```
 
 1. :thinking: **Optional:** Review persistent volumes and claims.
    Example:
