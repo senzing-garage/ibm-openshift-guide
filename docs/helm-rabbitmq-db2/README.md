@@ -32,12 +32,13 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Clone repository](#clone-repository)
     1. [Database](#database)
 1. [Demonstrate](#demonstrate)
+    1. [Log into OpenShift](#log-into-openshift)
     1. [EULA](#eula)
-    1. [Set environment variables](#set-environment-variables)
+    1. [Environment variables](#environment-variables)
+    1. [Security context](#security-context)
     1. [Database connection information](#database-connection-information)
     1. [Create custom helm values files](#create-custom-helm-values-files)
     1. [Create custom kubernetes configuration files](#create-custom-kubernetes-configuration-files)
-    1. [Log into OpenShift](#log-into-openshift)
     1. [Create OpenShift project](#create-openshift-project)
     1. [Create persistent volume](#create-persistent-volume)
     1. [Create persistent volume claims](#create-persistent-volume-claims)
@@ -135,6 +136,25 @@ The database connection information will be needed for the
 
 ## Demonstrate
 
+### Log into OpenShift
+
+1. :pencil2: Set environment variables.
+   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
+   Example:
+
+    ```console
+    export OC_USERNAME=my-username
+    export OC_PASSWORD=my-password
+    export OC_URL=https://xxxx:8443
+    ```
+
+1. Login.
+   Example:
+
+   ```console
+   oc login -u ${OC_USERNAME} -p ${OC_PASSWORD} ${OC_URL}
+   ```
+
 ### EULA
 
 To use the Senzing code, you must agree to the End User License Agreement (EULA).
@@ -152,7 +172,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     export SENZING_ACCEPT_EULA="
     ```
 
-### Set environment variables
+### Environment variables
 
 1. Set environment variables listed in "[Clone repository](#clone-repository)".
 
@@ -165,10 +185,6 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
     export DOCKER_REGISTRY_URL=docker.io
     export DOCKER_REGISTRY_SECRET=${DOCKER_REGISTRY_URL}-secret
-
-    export SENZING_RUN_AS_USER=1001
-    export SENZING_RUN_AS_GROUP=1001
-    export SENZING_FS_GROUP=1001
     ```
 
 1. :thinking: **Optional:** If using Transport Layer Security (TLS),
@@ -176,6 +192,24 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
     ```console
     export HELM_TLS="--tls"
+    ```
+
+### Security context
+
+1. FIXME: Find acceptable UIDs for system.
+   Example:
+
+    ```console
+    oc ................
+    ```
+
+1. :pencil2: Environment variables for `securityContext` OpenShift / Kubernetes / Helm chart values.
+   Example:
+
+    ```console
+    export SENZING_RUN_AS_USER=1001
+    export SENZING_RUN_AS_GROUP=1001
+    export SENZING_FS_GROUP=1001
     ```
 
 ### Database connection information
@@ -279,25 +313,6 @@ Only one method needs to be performed.
     :pencil2: Edit files in ${KUBERNETES_DIR} replacing the following variables with actual values.
 
     1. `${DEMO_NAMESPACE}`
-
-### Log into OpenShift
-
-1. :pencil2: Set environment variables.
-   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
-   Example:
-
-    ```console
-    export OC_USERNAME=my-username
-    export OC_PASSWORD=my-password
-    export OC_URL=https://xxxx:8443
-    ```
-
-1. Login.
-   Example:
-
-   ```console
-   oc login -u ${OC_USERNAME} -p ${OC_PASSWORD} ${OC_URL}
-   ```
 
 ### Create OpenShift project
 
