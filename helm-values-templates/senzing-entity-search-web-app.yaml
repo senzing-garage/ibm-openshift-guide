@@ -11,6 +11,12 @@ ingress:
       paths:
         - /
 
+securityContext:
+  enabled: true
+  runAsUser: ${SENZING_RUN_AS_USER}
+  runAsGroup: ${SENZING_RUN_AS_GROUP}
+  fsGroup: ${SENZING_FS_GROUP}
+
 senzing:
   apiServerUrl: "http://${DEMO_PREFIX}-senzing-api-server:8080"
 

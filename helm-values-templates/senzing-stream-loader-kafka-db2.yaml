@@ -6,6 +6,12 @@ imagePullSecrets:
 
 replicaCount: 10
 
+securityContext:
+  enabled: true
+  runAsUser: ${SENZING_RUN_AS_USER}
+  runAsGroup: ${SENZING_RUN_AS_GROUP}
+  fsGroup: ${SENZING_FS_GROUP}
+
 senzing:
   subcommand: kafka
   databaseUrl: "${SENZING_DATABASE_URL}"

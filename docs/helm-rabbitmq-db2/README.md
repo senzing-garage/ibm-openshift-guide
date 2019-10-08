@@ -154,6 +154,8 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 ### Set environment variables
 
+1. Set environment variables listed in "[Clone repository](#clone-repository)".
+
 1. :pencil2: Environment variables that need customization.
    Example:
 
@@ -163,9 +165,11 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
     export DOCKER_REGISTRY_URL=docker.io
     export DOCKER_REGISTRY_SECRET=${DOCKER_REGISTRY_URL}-secret
-    ```
 
-1. Set environment variables listed in "[Clone repository](#clone-repository)".
+    export SENZING_RUN_AS_USER=1001
+    export SENZING_RUN_AS_GROUP=1001
+    export SENZING_FS_GROUP=1001
+    ```
 
 1. :thinking: **Optional:** If using Transport Layer Security (TLS),
    then set the following environment variable:
@@ -355,7 +359,21 @@ that can be referred to by `volumeName`.
 The following are examples of how to create a PVC.
 Only one method of creating PVCs is needed.
 
-1. **Method #1** - Create persistent volume claims from `volumeName`.
+1. Reviw and modify as needed the following files:
+    1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
+    1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
+    1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
+    1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
+
+1. **Method #1** - Create persistent volume claims from `storageClassName`.
+   Example:
+
+    ```console
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
+    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
+    ```
+
+1. **Method #2** - Create persistent volume claims from `volumeName`.
    Example:
 
     ```console
@@ -363,13 +381,7 @@ Only one method of creating PVCs is needed.
     oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
     ```
 
-1. **Method #2** - Create persistent volume claims from `storageClassName`.
-   Example:
 
-    ```console
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
-    oc create -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
-    ```
 
 1. :thinking: **Optional:** Review persistent volumes and claims.
    Example:
