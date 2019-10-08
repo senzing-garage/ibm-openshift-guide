@@ -18,9 +18,9 @@ rabbitmq:
 
 securityContext:
   enabled: true
-  runAsUser: ${SENZING_RUN_AS_USER}
-  runAsGroup: ${SENZING_RUN_AS_GROUP}
-  fsGroup: ${SENZING_FS_GROUP}
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
 
 volumePermissions:
   enabled: true
