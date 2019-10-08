@@ -139,7 +139,7 @@ The database connection information will be needed for the
 ### Log into OpenShift
 
 1. :pencil2: Set environment variables.
-   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
+   **Note:** Setting `OC_PASSWORD` as an environment variable.
    Example:
 
     ```console

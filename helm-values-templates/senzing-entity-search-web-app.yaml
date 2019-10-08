@@ -11,6 +11,8 @@ ingress:
       paths:
         - /
 
+rbacEnabled: true
+
 securityContext:
   enabled: true
   runAsUser: ${SENZING_RUN_AS_USER}
