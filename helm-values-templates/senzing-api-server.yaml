@@ -20,6 +20,7 @@ securityContext:
   fsGroup: ${SENZING_FS_GROUP}
 
 senzing:
+  allowedOrigins: "*"
   bindAddr: all
   concurrency: 8
   iniFile: /etc/opt/senzing/G2Module.ini

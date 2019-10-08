@@ -2,7 +2,7 @@ apiVersion: security.openshift.io/v1
 kind: SecurityContextConstraints
 
 metadata:
-  name: senzing-security-context-constraint
+  name: senzing-security-context-constraint-limited
   namespace: ${DEMO_NAMESPACE}
 
 allowPrivilegeEscalation: true
