@@ -892,21 +892,47 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 
 #### Update hosts file
 
-1. FIXME: (This probably doesn't work, may need to "ping" the node name)
-   Determine the IP address of the OpenShift "infra" node.
+The `/etc/hosts` file needs to be updated with a line like:
+
+```console
+10.10.10.10 rabbitmq.local senzing-api.local senzing-configurator.local senzing-entity-search.local
+```
+
+:thinking:  Instead of `10.10.10.10`, the real IP address needs to be found.
+There are 2 methods to find the IP address.
+
+1. **Method #1:** Ping the "infra node".
    Example:
 
-    ```console
-    export SENZING_INFRA_NODE=$(oc get nodes \
-      --output jsonpath="{.items[0].metadata.name}" \
-      --selector "node-role.kubernetes.io/infra=true"
-    )
-    echo ${SENZING_INFRA_NODE}
-    ```
+    1. Determine the IP address of the OpenShift "infra" node.
+       Example:
 
-1. Add a line like the following example to `/etc/hosts` file
-   using the value of `${SENZING_INFRA_NODE}` instead of "10.10.10.10".
+        ```console
+        export SENZING_INFRA_NODE=$(oc get nodes \
+          --output jsonpath="{.items[0].metadata.name}" \
+          --selector "node-role.kubernetes.io/infra=true" \
+        )
+        ping ${SENZING_INFRA_NODE}
+        ```
+
+    1. From out output of the `ping` command, the IP address can be found.
+
+1. **Method #2:** Extract the IP Address.
    Example:
+
+    1. Add a line like the following example to `/etc/hosts` file
+       using the value of `${SENZING_INFRA_NODE}` instead of "10.10.10.10".
+        Example:
+
+        ```console
+        export SENZING_INFRA_NODE_IP_ADDRESs=$(oc get nodes \
+          --output jsonpath="{.items[0].status.addresses[0].address}" \
+          --selector "node-role.kubernetes.io/infra=true" \
+        )
+        echo ${SENZING_INFRA_NODE_IP_ADDRESS}
+        ```
+
+1. Into `/etc/hosts` file, append a line like the following example, replacing `10.10.10.10` with the infra node IP address.
 
     ```console
     10.10.10.10 rabbitmq.local senzing-api.local senzing-configurator.local senzing-entity-search.local
@@ -1038,7 +1064,8 @@ This deployment provides a pod that can be used to view Persistent Volumes.
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-rabbitmq
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-debug
     helm repo remove senzing
-    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/security-context-constraint.yaml
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/security-context-constraint-limited.yaml
+    oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/security-context-constraint-runasany.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-claim-senzing.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
