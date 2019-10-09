@@ -67,9 +67,11 @@ The following diagram shows the relationship of the Helm charts, docker containe
 
 ### Legend
 
-1. :thinking: - A "thinker" means that a little extra thinking may be required.
+1. :thinking: - A "thinker" icon means that a little extra thinking may be required.
    Perhaps you'll need to make some choices.
-1. :pencil2: - A "pencil" means that the instructions may need modification before performing.
+   Perhaps it's an optional step.
+1. :pencil2: - A "pencil" icon means that the instructions may need modification before performing.
+1. :warning: - A "warning" icon means that something tricky is happening, so pay attention.
 
 ## Expectations
 
@@ -216,16 +218,6 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 1. Craft the `SENZING_DATABASE_URL`.  It will be used in "helm values" files.
 
-    Components of the URL:
-
-    ```console
-    export DATABASE_USERNAME=<my-username>
-    export DATABASE_PASSWORD=<my-password>
-    export DATABASE_HOST=<hostname>
-    export DATABASE_PORT=<db2-connnection-port>
-    export DATABASE_DATABASE=<database-name>
-    ```
-
     :pencil2: Set environment variables.  Example:
 
     ```console
@@ -320,7 +312,6 @@ Only one method needs to be performed.
 ### Create OpenShift project
 
 1. :pencil2: Set environment variables.
-   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
    Example:
 
     ```console
@@ -328,7 +319,7 @@ Only one method needs to be performed.
     export OC_DISPLAY_NAME="My project"
     ```
 
-1. Login.
+1. Create project.
    Example:
 
     ```console
@@ -530,7 +521,7 @@ This deployment creates a RabbitMQ service.
       --watch
     ```
 
-1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
+1. :thinking: **Optional:** To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
 
 ### Install senzing-mock-data-generator Helm chart
 
@@ -793,7 +784,7 @@ The Senzing Configurator is a micro-service for changing Senzing configuration.
       -z ${DEMO_PREFIX}-senzing-configurator
     ```
 
-1. To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
+1. :thinking: **Optional:** To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
 
 ### Install senzing-stream-loader Helm chart
 
@@ -852,7 +843,7 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
       --watch
     ```
 
-1. To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server).
+1. :thinking: **Optional:** To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server).
 
 ### Install senzing-entity-search-web-app Helm chart
 
@@ -887,7 +878,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
       --watch
     ```
 
-1. To view Senzing Entity Search WebApp, see [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp).
+1. :thinking: **Optional:** To view Senzing Entity Search WebApp, see [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp).
 
 ### View data
 
