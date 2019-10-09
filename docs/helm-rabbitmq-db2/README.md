@@ -21,7 +21,6 @@ The following diagram shows the relationship of the Helm charts, docker containe
 ### Contents
 
 1. [Expectations](#expectations)
-    1. [Space](#space)
     1. [Time](#time)
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
@@ -66,11 +65,13 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Delete database tables](#delete-database-tables)
     1. [Delete git repository](#delete-git-repository)
 
+### Legend
+
+1. :thinking: - A "thinker" means that a little extra thinking may be required.
+   Perhaps you'll need to make some choices.
+1. :pencil2: - A "pencil" means that the instructions may need modification before performing.
+
 ## Expectations
-
-### Space
-
-This repository and demonstration require 20 GB free disk space.
 
 ### Time
 
