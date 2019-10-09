@@ -63,9 +63,9 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [View data](#view-data)
 1. [Troubleshooting](#troubleshooting)
     1. [Install senzing-debug Helm chart](#install-senzing-debug-helm-chart)
+    1. [Support](#support)
 1. [Cleanup](#cleanup)
     1. [Delete everything in project](#delete-everything-in-project)
-    1. [Delete database tables](#delete-database-tables)
     1. [Delete git repository](#delete-git-repository)
 
 ### Legend
