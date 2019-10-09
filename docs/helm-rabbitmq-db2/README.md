@@ -278,6 +278,9 @@ Only one method needs to be performed.
     1. `${DOCKER_REGISTRY_URL}`
     1. `${SENZING_ACCEPT_EULA}`
     1. `${SENZING_DATABASE_URL}`
+    1. `${SENZING_FS_GROUP}`
+    1. `${SENZING_RUN_AS_USER}`
+    1. `${SENZING_RUN_AS_GROUP}`
 
 ### Create custom kubernetes configuration files
 
