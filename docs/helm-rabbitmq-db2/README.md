@@ -996,7 +996,8 @@ There are 2 methods to find the IP address.
 
 ### Install senzing-debug Helm chart
 
-This deployment provides a pod that can be used to view Persistent Volumes.
+This deployment provides a pod that can be used to view Persistent Volumes
+and run Senzing utility programs.
 
 1. Install chart.
    Example:
@@ -1051,6 +1052,7 @@ This deployment provides a pod that can be used to view Persistent Volumes.
 If the instructions don't address an issue you are seeing, please "submit a request" so we can help you.
 
 1. [Submit a request](https://senzing.zendesk.com/hc/en-us/requests/new)
+1. [Report a bug on GitHub](https://github.com/Senzing/ibm-openshift-guide/issues)
 
 ## Cleanup
 
