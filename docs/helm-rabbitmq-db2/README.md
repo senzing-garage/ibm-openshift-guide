@@ -1051,12 +1051,19 @@ and run Senzing utility programs.
 
 ### Support
 
+Additional information:
+
+1. [Helm Charts](https://github.com/Senzing/awesome#helm-charts)
+1. [Docker images on Docker Hub](https://github.com/Senzing/awesome#dockerhub)
+1. [Dockerfiles](https://github.com/Senzing/awesome#dockerfiles)
+
 If the instructions don't address an issue you are seeing, please "submit a request" so we can help you.
 
 1. [Submit a request](https://senzing.zendesk.com/hc/en-us/requests/new)
 1. [Report an issue on GitHub](https://github.com/Senzing/ibm-openshift-guide/issues)
-1. This repository is a community project.
-   Feel free to submit a Pull Request for change.
+
+This repository is a community project.
+Feel free to submit a Pull Request for change.
 
 ## Cleanup
 
