@@ -950,7 +950,6 @@ There are 2 methods to find the IP address.
 
 1. If not already done, [update hosts file](#update-hosts-file).
 1. Senzing Configurator will be viewable at [senzing-configurator.local/datasources](http://senzing-configurator.local/datasources).
-
 1. Make HTTP calls via `curl`.
    Example:
 
@@ -970,7 +969,6 @@ There are 2 methods to find the IP address.
 1. View results from Senzing REST API server.
    The server supports the
    [Senzing REST API](https://github.com/Senzing/senzing-rest-api).
-
    1. From a web browser.
       Examples:
       1. [senzing-api.local/heartbeat](http://senzing-api.local/heartbeat)
