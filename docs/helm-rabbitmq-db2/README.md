@@ -665,7 +665,8 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 ### Create Senzing schema on Db2
 
-1. Copy `g2core-schema-db2-create.sql` to a system that can access the database created for Senzing.
+1. :pencil2: Copy `g2core-schema-db2-create.sql` to a system that can access the database created for Senzing.
+   Use an appropriate hostname or IP address.
    Example:
 
    ```console
@@ -706,6 +707,8 @@ The step copies the SQL file used to create the Senzing database schema onto the
     ```
 
 ### Database tuning
+
+:thinking: **Optional:** Database tuning may be performed later.
 
 1. For information on tuning the database for optimum performance, see
    [Tuning your Database](https://senzing.zendesk.com/hc/en-us/articles/360016288254-Tuning-your-Database).
