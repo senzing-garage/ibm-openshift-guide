@@ -920,19 +920,18 @@ There are 2 methods to find the IP address.
 1. **Method #2:** Extract the IP Address.
    Example:
 
-    1. Add a line like the following example to `/etc/hosts` file
-       using the value of `${SENZING_INFRA_NODE}` instead of "10.10.10.10".
-        Example:
+    1. Query the IP address directly.
+       Example:
 
         ```console
-        export SENZING_INFRA_NODE_IP_ADDRESs=$(oc get nodes \
+        export SENZING_INFRA_NODE_IP_ADDRESS=$(oc get nodes \
           --output jsonpath="{.items[0].status.addresses[0].address}" \
           --selector "node-role.kubernetes.io/infra=true" \
         )
         echo ${SENZING_INFRA_NODE_IP_ADDRESS}
         ```
 
-1. Into `/etc/hosts` file, append a line like the following example, replacing `10.10.10.10` with the infra node IP address.
+1. Into the `/etc/hosts` file, append a line like the following example, replacing `10.10.10.10` with the infra node IP address.
 
     ```console
     10.10.10.10 rabbitmq.local senzing-api.local senzing-configurator.local senzing-entity-search.local
