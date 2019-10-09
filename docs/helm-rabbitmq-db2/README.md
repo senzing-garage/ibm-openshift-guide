@@ -1052,7 +1052,7 @@ and run Senzing utility programs.
 If the instructions don't address an issue you are seeing, please "submit a request" so we can help you.
 
 1. [Submit a request](https://senzing.zendesk.com/hc/en-us/requests/new)
-1. [Report a bug on GitHub](https://github.com/Senzing/ibm-openshift-guide/issues)
+1. [Report an issue on GitHub](https://github.com/Senzing/ibm-openshift-guide/issues)
 
 ## Cleanup
 
@@ -1080,10 +1080,6 @@ If the instructions don't address an issue you are seeing, please "submit a requ
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     ```
-
-### Delete database tables
-
-1. **FIXME:** Example:
 
 ### Delete git repository
 
