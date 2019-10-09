@@ -208,7 +208,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     oc ................
     ```
 
-1. :pencil2: Environment variables for `securityContext` OpenShift / Kubernetes / Helm chart values.
+1. :pencil2: Environment variables for `securityContext` values.
    Example:
 
     ```console
@@ -219,7 +219,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 ### Database connection information
 
-1. Craft the `SENZING_DATABASE_URL`.  It will be used in "helm values" files.
+1. Craft the `SENZING_DATABASE_URL`.
 
     :pencil2: Set environment variables.  Example:
 
@@ -940,6 +940,7 @@ There are 2 methods to find the IP address.
 
 #### View RabbitMQ
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. RabbitMQ will be viewable at [rabbitmq.local](http://rabbitmq.local).
     1. Login
         1. See [helm-values/rabbitmq.yaml](../../helm-values/rabbitmq.yaml) for Username and password.
@@ -947,6 +948,7 @@ There are 2 methods to find the IP address.
 
 #### View Senzing Configurator
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. Senzing Configurator will be viewable at [senzing-configurator.local/datasources](http://senzing-configurator.local/datasources).
 
 1. Make HTTP calls via `curl`.
@@ -964,6 +966,7 @@ There are 2 methods to find the IP address.
 
 #### View Senzing API Server
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. View results from Senzing REST API server.
    The server supports the
    [Senzing REST API](https://github.com/Senzing/senzing-rest-api).
@@ -988,6 +991,7 @@ There are 2 methods to find the IP address.
 
 #### View Senzing Entity Search WebApp
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. Senzing Entity Search WebApp will be viewable at [senzing-entity-search.local](http://senzing-entity-search.local).
    The [demonstration](https://github.com/Senzing/knowledge-base/blob/master/demonstrations/docker-compose-web-app.md)
    instructions will give a tour of the Senzing web app.
