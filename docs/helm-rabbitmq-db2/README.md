@@ -14,6 +14,9 @@ The instructions show how to set up a system that:
 1. Reads information from Senzing via [Senzing REST API](https://github.com/Senzing/senzing-rest-api) server.
 1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
 
+For more information, see
+[Senzing Entity Resolution for IBM Cloud Pak for Data](https://senzing.com/cloud_pack_for_data).
+
 The following diagram shows the relationship of the Helm charts, docker containers, and code in this Kubernetes demonstration.
 
 ![Image of architecture](architecture.png)
@@ -1039,6 +1042,12 @@ This deployment provides a pod that can be used to view Persistent Volumes.
     ```console
     oc exec -it --namespace ${DEMO_NAMESPACE} ${SENZING_DEBUG_POD_NAME} -- /bin/bash
     ```
+
+### Support
+
+If the instructions don't address an issue you are seeing, please "submit a request" so we can help you.
+
+1. [Submit a request](https://senzing.zendesk.com/hc/en-us/requests/new)
 
 ## Cleanup
 
