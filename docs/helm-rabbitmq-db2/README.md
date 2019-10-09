@@ -102,7 +102,7 @@ This repository assumes a working knowledge of:
 
 1. Third party Software requirements:
     1. IBM Db2
-    1. RabbitMQ
+    1. [RabbitMQ](#install-rabbitmq-helm-chart)
 
 ### Security Requirements
 
@@ -136,7 +136,8 @@ The database connection information will be needed for the
 ### Log into OpenShift
 
 1. :pencil2: Set environment variables.
-   **Note:** Setting `OC_PASSWORD` as an environment variable.
+   **Note:** Setting `OC_PASSWORD` as an environment variable is not a best practice.
+   The example is meant to highlight the variables used in the `oc login` command.
    Example:
 
     ```console
