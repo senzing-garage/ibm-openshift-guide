@@ -96,7 +96,7 @@ This repository assumes a working knowledge of:
 1. Minimum CPU: FIXME:
 1. Minimum Memory:  FIXME:
 1. Minimum Storage:  200Gi
-1. Number of Pods/Replicas:  15
+1. Number of Pods/Replicas:  20
 
 ### Software Requirements
 
@@ -944,6 +944,7 @@ There are 2 methods to find the IP address.
 1. RabbitMQ will be viewable at [rabbitmq.local](http://rabbitmq.local).
     1. Login
         1. See [helm-values/rabbitmq.yaml](../../helm-values/rabbitmq.yaml) for Username and password.
+        1. Default: user/passw0rd
 
 #### View Senzing Configurator
 
