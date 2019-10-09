@@ -724,6 +724,9 @@ The step copies the SQL file used to create the Senzing database schema onto the
 1. Additional tuning parameters to try:
 
     ```console
+    export DB2_DATABASE=G2
+    export DB2_USER=db2inst1
+
     db2 connect to ${DB2_DATABASE} user ${DB2_USER}
 
     db2 UPDATE SYS_SEQUENCE SET CACHE_SIZE=100000
@@ -886,7 +889,7 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
 ### View data
 
 1. Username and password for the following sites are the values seen in the corresponding "values" YAML file located in
-   [helm-values-templates](../helm-values-templates).
+   [helm-values-templates](../../helm-values-templates).
 
 #### Update hosts file
 
