@@ -97,7 +97,7 @@ This repository assumes a working knowledge of:
 1. Minimum Memory:  16 GB
 1. Minimum Storage:  200Gi
 1. Number of Pods/Replicas:  20
-1. More details in [System Requirements ](https://senzing.zendesk.com/hc/en-us/articles/115010259947-System-Requirements)
+1. More details in [System Requirements](https://senzing.zendesk.com/hc/en-us/articles/115010259947-System-Requirements).
 
 ### Software Requirements
 
