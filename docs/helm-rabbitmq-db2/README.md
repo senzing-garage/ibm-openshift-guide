@@ -706,8 +706,6 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 ### Database tuning
 
-**FIXME:** Continue to improve.
-
 1. For information on tuning the database for optimum performance, see
    [Tuning your Database](https://senzing.zendesk.com/hc/en-us/articles/360016288254-Tuning-your-Database).
 
