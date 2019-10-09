@@ -14,6 +14,9 @@ The instructions show how to set up a system that:
 1. Reads information from Senzing via [Senzing REST API](https://github.com/Senzing/senzing-rest-api) server.
 1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
 
+For more information, see
+[Senzing Entity Resolution for IBM Cloud Pak for Data](https://senzing.com/cloud_pack_for_data).
+
 The following diagram shows the relationship of the Helm charts, docker containers, and code in this Kubernetes demonstration.
 
 ![Image of architecture](architecture.png)
@@ -21,7 +24,6 @@ The following diagram shows the relationship of the Helm charts, docker containe
 ### Contents
 
 1. [Expectations](#expectations)
-    1. [Space](#space)
     1. [Time](#time)
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
@@ -61,16 +63,20 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [View data](#view-data)
 1. [Troubleshooting](#troubleshooting)
     1. [Install senzing-debug Helm chart](#install-senzing-debug-helm-chart)
+    1. [Support](#support)
 1. [Cleanup](#cleanup)
     1. [Delete everything in project](#delete-everything-in-project)
-    1. [Delete database tables](#delete-database-tables)
     1. [Delete git repository](#delete-git-repository)
 
+### Legend
+
+1. :thinking: - A "thinker" icon means that a little extra thinking may be required.
+   Perhaps you'll need to make some choices.
+   Perhaps it's an optional step.
+1. :pencil2: - A "pencil" icon means that the instructions may need modification before performing.
+1. :warning: - A "warning" icon means that something tricky is happening, so pay attention.
+
 ## Expectations
-
-### Space
-
-This repository and demonstration require 20 GB free disk space.
 
 ### Time
 
@@ -93,25 +99,23 @@ This repository assumes a working knowledge of:
 
 ### Hardware Requirements
 
-1. Minimum CPU: FIXME:
-1. Minimum Memory:  FIXME:
-1. Minimum Storage:  FIXME:
-1. Minimum Worker/Master Nodes:  FIXME:
-1. Number of Pods/Replicas:  FIXME:
+1. Minimum CPU: 4
+1. Minimum Memory:  16 GB
+1. Minimum Storage:  200Gi
+1. Number of Pods/Replicas:  20
+1. More details in [System Requirements](https://senzing.zendesk.com/hc/en-us/articles/115010259947-System-Requirements).
 
 ### Software Requirements
 
-1. Storage Software requirements:
-    1. Portworx/GlusterFS/NFS FIXME:
-1. OS/Virtualizationrequirements: FIXME:
-1. Network Virtualization requirements: FIXME:
-1. Security Software requirements: FIXME:
-1. Third party Software requirements: FIXME:
-1. Specific version dependencies: FIXME:
+1. Third party Software requirements:
+    1. IBM Db2
+    1. [RabbitMQ](#install-rabbitmq-helm-chart)
 
 ### Security Requirements
 
-1. Permission requirements: FIXME:
+1. Permission requirements:
+    1. root permission for init containers
+    1. non-root for all other containers
 
 ### Clone repository
 
@@ -139,7 +143,8 @@ The database connection information will be needed for the
 ### Log into OpenShift
 
 1. :pencil2: Set environment variables.
-   **Note:** Setting `OC_PASSWORD` as an environment variable.
+   **Note:** Setting `OC_PASSWORD` as an environment variable is not a best practice.
+   The example is meant to highlight the variables used in the `oc login` command.
    Example:
 
     ```console
@@ -203,7 +208,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     oc ................
     ```
 
-1. :pencil2: Environment variables for `securityContext` OpenShift / Kubernetes / Helm chart values.
+1. :pencil2: Environment variables for `securityContext` values.
    Example:
 
     ```console
@@ -214,17 +219,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 ### Database connection information
 
-1. Craft the `SENZING_DATABASE_URL`.  It will be used in "helm values" files.
-
-    Components of the URL:
-
-    ```console
-    export DATABASE_USERNAME=<my-username>
-    export DATABASE_PASSWORD=<my-password>
-    export DATABASE_HOST=<hostname>
-    export DATABASE_PORT=<db2-connnection-port>
-    export DATABASE_DATABASE=<database-name>
-    ```
+1. Craft the `SENZING_DATABASE_URL`.
 
     :pencil2: Set environment variables.  Example:
 
@@ -280,6 +275,9 @@ Only one method needs to be performed.
     1. `${DOCKER_REGISTRY_URL}`
     1. `${SENZING_ACCEPT_EULA}`
     1. `${SENZING_DATABASE_URL}`
+    1. `${SENZING_FS_GROUP}`
+    1. `${SENZING_RUN_AS_USER}`
+    1. `${SENZING_RUN_AS_GROUP}`
 
 ### Create custom kubernetes configuration files
 
@@ -317,7 +315,6 @@ Only one method needs to be performed.
 ### Create OpenShift project
 
 1. :pencil2: Set environment variables.
-   **Note:** You may not want to set `OC_PASSWORD` as an environment variable.
    Example:
 
     ```console
@@ -325,7 +322,7 @@ Only one method needs to be performed.
     export OC_DISPLAY_NAME="My project"
     ```
 
-1. Login.
+1. Create project.
    Example:
 
     ```console
@@ -527,7 +524,7 @@ This deployment creates a RabbitMQ service.
       --watch
     ```
 
-1. To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
+1. :thinking: **Optional:** To view RabbitMQ, see [View RabbitMQ](#view-rabbitmq)
 
 ### Install senzing-mock-data-generator Helm chart
 
@@ -664,7 +661,8 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 ### Create Senzing schema on Db2
 
-1. Copy `g2core-schema-db2-create.sql` to a system that can access the database created for Senzing.
+1. :pencil2: Copy `g2core-schema-db2-create.sql` to a system that can access the database created for Senzing.
+   Use an appropriate hostname or IP address.
    Example:
 
    ```console
@@ -706,6 +704,8 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 ### Database tuning
 
+:thinking: **Optional:** Database tuning may be performed later.
+
 1. For information on tuning the database for optimum performance, see
    [Tuning your Database](https://senzing.zendesk.com/hc/en-us/articles/360016288254-Tuning-your-Database).
 
@@ -724,6 +724,9 @@ The step copies the SQL file used to create the Senzing database schema onto the
 1. Additional tuning parameters to try:
 
     ```console
+    export DB2_DATABASE=G2
+    export DB2_USER=db2inst1
+
     db2 connect to ${DB2_DATABASE} user ${DB2_USER}
 
     db2 UPDATE SYS_SEQUENCE SET CACHE_SIZE=100000
@@ -787,7 +790,7 @@ The Senzing Configurator is a micro-service for changing Senzing configuration.
       -z ${DEMO_PREFIX}-senzing-configurator
     ```
 
-1. To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
+1. :thinking: **Optional:** To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
 
 ### Install senzing-stream-loader Helm chart
 
@@ -846,7 +849,7 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
       --watch
     ```
 
-1. To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server).
+1. :thinking: **Optional:** To view Senzing API server, see [View Senzing API Server](#view-senzing-api-server).
 
 ### Install senzing-entity-search-web-app Helm chart
 
@@ -881,12 +884,12 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
       --watch
     ```
 
-1. To view Senzing Entity Search WebApp, see [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp).
+1. :thinking: **Optional:** To view Senzing Entity Search WebApp, see [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp).
 
 ### View data
 
 1. Username and password for the following sites are the values seen in the corresponding "values" YAML file located in
-   [helm-values-templates](../helm-values-templates).
+   [helm-values-templates](../../helm-values-templates).
 
 #### Update hosts file
 
@@ -937,14 +940,16 @@ There are 2 methods to find the IP address.
 
 #### View RabbitMQ
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. RabbitMQ will be viewable at [rabbitmq.local](http://rabbitmq.local).
     1. Login
         1. See [helm-values/rabbitmq.yaml](../../helm-values/rabbitmq.yaml) for Username and password.
+        1. Default: user/passw0rd (seen in [helm-values-templates/rabbitmq.yaml](../../helm-values-templates/rabbitmq.yaml))
 
 #### View Senzing Configurator
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. Senzing Configurator will be viewable at [senzing-configurator.local/datasources](http://senzing-configurator.local/datasources).
-
 1. Make HTTP calls via `curl`.
    Example:
 
@@ -960,10 +965,10 @@ There are 2 methods to find the IP address.
 
 #### View Senzing API Server
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. View results from Senzing REST API server.
    The server supports the
    [Senzing REST API](https://github.com/Senzing/senzing-rest-api).
-
    1. From a web browser.
       Examples:
       1. [senzing-api.local/heartbeat](http://senzing-api.local/heartbeat)
@@ -984,6 +989,7 @@ There are 2 methods to find the IP address.
 
 #### View Senzing Entity Search WebApp
 
+1. If not already done, [update hosts file](#update-hosts-file).
 1. Senzing Entity Search WebApp will be viewable at [senzing-entity-search.local](http://senzing-entity-search.local).
    The [demonstration](https://github.com/Senzing/knowledge-base/blob/master/demonstrations/docker-compose-web-app.md)
    instructions will give a tour of the Senzing web app.
@@ -992,7 +998,8 @@ There are 2 methods to find the IP address.
 
 ### Install senzing-debug Helm chart
 
-This deployment provides a pod that can be used to view Persistent Volumes.
+This deployment provides a pod that can be used to view Persistent Volumes
+and run Senzing utility programs.
 
 1. Install chart.
    Example:
@@ -1042,6 +1049,22 @@ This deployment provides a pod that can be used to view Persistent Volumes.
     oc exec -it --namespace ${DEMO_NAMESPACE} ${SENZING_DEBUG_POD_NAME} -- /bin/bash
     ```
 
+### Support
+
+Additional information:
+
+1. [Helm Charts](https://github.com/Senzing/awesome#helm-charts)
+1. [Docker images on Docker Hub](https://github.com/Senzing/awesome#dockerhub)
+1. [Dockerfiles](https://github.com/Senzing/awesome#dockerfiles)
+
+If the instructions don't address an issue you are seeing, please "submit a request" so we can help you.
+
+1. [Submit a request](https://senzing.zendesk.com/hc/en-us/requests/new)
+1. [Report an issue on GitHub](https://github.com/Senzing/ibm-openshift-guide/issues)
+
+This repository is a community project.
+Feel free to submit a Pull Request for change.
+
 ## Cleanup
 
 ### Delete everything in project
@@ -1068,10 +1091,6 @@ This deployment provides a pod that can be used to view Persistent Volumes.
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
     oc delete ${HELM_TLS} -f ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     ```
-
-### Delete database tables
-
-1. **FIXME:** Example:
 
 ### Delete git repository
 

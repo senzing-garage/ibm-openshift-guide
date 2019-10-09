@@ -14,6 +14,9 @@ The instructions show how to set up a system that:
 1. Reads information from Senzing via [Senzing REST API](https://github.com/Senzing/senzing-rest-api) server.
 1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
 
+For more information, see
+[Senzing Entity Resolution for IBM Cloud Pak for Data](https://senzing.com/cloud_pack_for_data).
+
 The following diagram shows the relationship of the Helm charts, docker containers,
 and code in this IBM Cloud Pak for Data reference implementation.
 
