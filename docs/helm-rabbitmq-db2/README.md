@@ -95,23 +95,20 @@ This repository assumes a working knowledge of:
 
 1. Minimum CPU: FIXME:
 1. Minimum Memory:  FIXME:
-1. Minimum Storage:  FIXME:
-1. Minimum Worker/Master Nodes:  FIXME:
-1. Number of Pods/Replicas:  FIXME:
+1. Minimum Storage:  200Gi
+1. Number of Pods/Replicas:  15
 
 ### Software Requirements
 
-1. Storage Software requirements:
-    1. Portworx/GlusterFS/NFS FIXME:
-1. OS/Virtualizationrequirements: FIXME:
-1. Network Virtualization requirements: FIXME:
-1. Security Software requirements: FIXME:
-1. Third party Software requirements: FIXME:
-1. Specific version dependencies: FIXME:
+1. Third party Software requirements:
+    1. IBM Db2
+    1. RabbitMQ
 
 ### Security Requirements
 
-1. Permission requirements: FIXME:
+1. Permission requirements:
+    1. root permission for init containers
+    1. non-root for all other containers
 
 ### Clone repository
 
