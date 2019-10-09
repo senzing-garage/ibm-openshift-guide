@@ -943,7 +943,7 @@ There are 2 methods to find the IP address.
 1. RabbitMQ will be viewable at [rabbitmq.local](http://rabbitmq.local).
     1. Login
         1. See [helm-values/rabbitmq.yaml](../../helm-values/rabbitmq.yaml) for Username and password.
-        1. Default: user/passw0rd
+        1. Default: user/passw0rd (seen in [helm-values-templates/rabbitmq.yaml](../../helm-values-templates/rabbitmq.yaml))
 
 #### View Senzing Configurator
 
