@@ -15,7 +15,7 @@ The instructions show how to set up a system that:
 1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
 
 For more information, see
-[Senzing Entity Resolution for IBM Cloud Pak for Data](https://senzing.com/cloud_pack_for_data).
+[Senzing Entity Resolution for IBM Cloud Pak for Data](https://senzing.com/cloud_pak_for_data).
 
 The following diagram shows the relationship of the Helm charts, docker containers, and code in this Kubernetes demonstration.
 
