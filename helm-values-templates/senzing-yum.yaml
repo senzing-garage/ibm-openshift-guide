@@ -18,4 +18,4 @@ senzing:
   yumParameters:
     - -y
     - install
-    - new-rpm-name
+    - senzingapi-ibm-cpd
