@@ -746,7 +746,7 @@ The init-container creates files from templates and initializes the G2 database.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-init-container \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/senzing-init-container-db2.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-init-container.yaml \
       senzing/senzing-init-container
     ```
 
@@ -805,7 +805,7 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-stream-loader \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/senzing-stream-loader-rabbitmq-db2.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-stream-loader-rabbitmq.yaml \
       senzing/senzing-stream-loader
     ```
 
@@ -816,6 +816,30 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
     oc adm policy add-scc-to-user \
       senzing-security-context-constraint-limited \
       -z ${DEMO_PREFIX}-senzing-stream-loader
+    ```
+
+### Install senzing-redoer Helm chart
+
+The Senzing Redoer API server receives HTTP requests to read and modify Senzing data.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install ${HELM_TLS} \
+      --name ${DEMO_PREFIX}-senzing-redoer \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/senzing-redoer.yaml \
+      senzing/senzing-redoer
+    ```
+
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-redoer
     ```
 
 ### Install senzing-api-server Helm chart
