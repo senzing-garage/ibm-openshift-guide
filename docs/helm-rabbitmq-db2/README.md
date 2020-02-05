@@ -1102,6 +1102,7 @@ Feel free to submit a Pull Request for change.
     ```console
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-entity-search-web-app
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-api-server
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-redoer
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-stream-loader
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-configurator
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-init-container
