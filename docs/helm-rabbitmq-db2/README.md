@@ -318,7 +318,7 @@ Only one method needs to be performed.
    Example:
 
     ```console
-    export OC_DESCRIPTION="My descriptions..."
+    export OC_DESCRIPTION="My description..."
     export OC_DISPLAY_NAME="My project"
     ```
 
@@ -666,7 +666,7 @@ The step copies the SQL file used to create the Senzing database schema onto the
    Example:
 
    ```console
-   export DATABASE_HOST=10.176.116.45
+   export DATABASE_HOST=my.database.com
 
    scp ${SENZING_LOCAL_SQL_PATH} db2inst1@${DATABASE_HOST}:
    ```
