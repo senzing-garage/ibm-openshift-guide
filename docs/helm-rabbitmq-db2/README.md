@@ -95,7 +95,7 @@ This repository assumes a working knowledge of:
 
 ### Cloud Pak for Data
 
-1. See [Installing Cloud Pak for Data on Red Hat OpenShift (without IBM Cloud Private)](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/install/openshift-noicp.html).
+1. See [Installing IBM Cloud Pak for Data](https://www.ibm.com/support/knowledgecenter/SSQNUZ_2.5.0/cpd/install/install.html).
 
 ### Hardware Requirements
 
