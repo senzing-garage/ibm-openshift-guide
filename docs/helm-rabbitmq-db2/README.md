@@ -27,7 +27,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Time](#time)
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
-    1. [Cloud Pak for Data](#cloud-pak-for-data)
+    1. [IBM Cloud Pak for Data](#ibm-cloud-pak-for-data)
     1. [Hardware Requirements](#hardware-requirements)
     1. [Software Requirements](#software-requirements)
     1. [Security Requirements](#security-requirements)
@@ -93,9 +93,9 @@ This repository assumes a working knowledge of:
 
 ## Prerequisites
 
-### Cloud Pak for Data
+### IBM Cloud Pak for Data
 
-1. See [Installing Cloud Pak for Data on Red Hat OpenShift (without IBM Cloud Private)](https://docs-icpdata.mybluemix.net/docs/content/SSQNUZ_current/com.ibm.icpdata.doc/zen/install/openshift-noicp.html).
+1. See [Installing IBM Cloud Pak for Data](https://www.ibm.com/support/knowledgecenter/SSQNUZ_2.5.0/cpd/install/install.html).
 
 ### Hardware Requirements
 
@@ -318,7 +318,7 @@ Only one method needs to be performed.
    Example:
 
     ```console
-    export OC_DESCRIPTION="My descriptions..."
+    export OC_DESCRIPTION="My description..."
     export OC_DISPLAY_NAME="My project"
     ```
 
@@ -343,7 +343,7 @@ There are many ways of creating a Persistent Volume.
 The following is an example of creating an NFS type Persistent Volume
 that can be referred to in a PVC by `spec.volumeName`.
 
-1. :pencil2: Review and modify as needed the contents of:
+1. :pencil2: Review and modify, as needed, the contents of:
     1. ${KUBERNETES_DIR}/persistent-volume-rabbitmq.yaml
     1. ${KUBERNETES_DIR}/persistent-volume-senzing.yaml
 
@@ -367,12 +367,12 @@ that can be referred to in a PVC by `spec.volumeName`.
 
 :thinking: There are multiple ways of creating a persistent volume claim (PVC).
 The following are examples of how to create a PVC
-with `spec.storageClassName` and `spec.volumeName`.
+with `spec.storageClassName` or `spec.volumeName`.
 Only one method of creating PVCs is needed.
 
 1. **Method #1** - Create persistent volume claims using `spec.storageClassName`.
 
-    1. Review and modify as needed the following files:
+    1. Review and modify, as needed, the following files:
         1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-storageClassName.yaml
         1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-storageClassName.yaml
 
@@ -386,7 +386,7 @@ Only one method of creating PVCs is needed.
 
 1. **Method #2** - Create persistent volume claims using `spec.volumeName`.
 
-    1. Review and modify as needed the following files:
+    1. Review and modify, as needed, the following files:
         1. ${KUBERNETES_DIR}/persistent-volume-claim-rabbitmq-volumeName.yaml
         1. ${KUBERNETES_DIR}/persistent-volume-claim-senzing-volumeName.yaml
 
@@ -599,11 +599,11 @@ in later steps.
 ### Install Senzing license
 
 :thinking: **Optional:**
-Senzing comes with a trial license that supports 10,000 records.
+Senzing for IBM Cloud Pak for Data comes with a trial license that supports one million records.
 If this is sufficient, there is no need to install a new license
 and this step may be skipped.
 
-1. If working with more than 10,000 records,
+1. If working with more than one million records,
    [obtain a Senzing license](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/obtain-senzing-license.md).
 
 1. Be sure the `senzing-base` Helm Chart has been installed and is running.
@@ -666,7 +666,9 @@ The step copies the SQL file used to create the Senzing database schema onto the
    Example:
 
    ```console
-   scp ${SENZING_LOCAL_SQL_PATH} db2inst1@10.176.116.45:
+   export DATABASE_HOST=my.database.com
+
+   scp ${SENZING_LOCAL_SQL_PATH} db2inst1@${DATABASE_HOST}:
    ```
 
 1. If needed, create a database for Senzing data.
@@ -932,7 +934,7 @@ There are 2 methods to find the IP address.
         echo ${SENZING_INFRA_NODE_IP_ADDRESS}
         ```
 
-1. Into the `/etc/hosts` file, append a line like the following example, replacing `10.10.10.10` with the infra node IP address.
+1. :pencil2: Into the `/etc/hosts` file, append a line like the following example, replacing `10.10.10.10` with the infra node IP address.
 
     ```console
     10.10.10.10 rabbitmq.local senzing-api.local senzing-configurator.local senzing-entity-search.local
