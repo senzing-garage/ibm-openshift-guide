@@ -58,6 +58,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Install senzing-init-container Helm chart](#install-senzing-init-container-helm-chart)
     1. [Install senzing-configurator Helm Chart](#install-senzing-configurator-helm-chart)
     1. [Install senzing-stream-loader Helm chart](#install-senzing-stream-loader-helm-chart)
+    1. [Install senzing-redoer Helm chart](#install-senzing-redoer-helm-chart)
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
     1. [Install senzing-entity-search-web-app Helm chart](#install-senzing-entity-search-web-app-helm-chart)
     1. [View data](#view-data)
@@ -746,7 +747,7 @@ The init-container creates files from templates and initializes the G2 database.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-init-container \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/senzing-init-container-db2.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-init-container.yaml \
       senzing/senzing-init-container
     ```
 
@@ -805,7 +806,7 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
     helm install ${HELM_TLS} \
       --name ${DEMO_PREFIX}-senzing-stream-loader \
       --namespace ${DEMO_NAMESPACE} \
-      --values ${HELM_VALUES_DIR}/senzing-stream-loader-rabbitmq-db2.yaml \
+      --values ${HELM_VALUES_DIR}/senzing-stream-loader-rabbitmq.yaml \
       senzing/senzing-stream-loader
     ```
 
@@ -816,6 +817,30 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
     oc adm policy add-scc-to-user \
       senzing-security-context-constraint-limited \
       -z ${DEMO_PREFIX}-senzing-stream-loader
+    ```
+
+### Install senzing-redoer Helm chart
+
+The Senzing Redoer processes Senzing "redo" records.
+
+1. Install chart.
+   Example:
+
+    ```console
+    helm install ${HELM_TLS} \
+      --name ${DEMO_PREFIX}-senzing-redoer \
+      --namespace ${DEMO_NAMESPACE} \
+      --values ${HELM_VALUES_DIR}/senzing-redoer.yaml \
+      senzing/senzing-redoer
+    ```
+
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-redoer
     ```
 
 ### Install senzing-api-server Helm chart
@@ -1077,6 +1102,7 @@ Feel free to submit a Pull Request for change.
     ```console
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-entity-search-web-app
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-api-server
+    helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-redoer
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-stream-loader
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-configurator
     helm delete ${HELM_TLS} --purge ${DEMO_PREFIX}-senzing-init-container
