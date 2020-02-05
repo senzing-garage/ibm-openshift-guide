@@ -58,6 +58,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Install senzing-init-container Helm chart](#install-senzing-init-container-helm-chart)
     1. [Install senzing-configurator Helm Chart](#install-senzing-configurator-helm-chart)
     1. [Install senzing-stream-loader Helm chart](#install-senzing-stream-loader-helm-chart)
+    1. [Install senzing-redoer Helm chart](#install-senzing-redoer-helm-chart)
     1. [Install senzing-api-server Helm chart](#install-senzing-api-server-helm-chart)
     1. [Install senzing-entity-search-web-app Helm chart](#install-senzing-entity-search-web-app-helm-chart)
     1. [View data](#view-data)
@@ -820,7 +821,7 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
 
 ### Install senzing-redoer Helm chart
 
-The Senzing Redoer API server receives HTTP requests to read and modify Senzing data.
+The Senzing Redoer processes Senzing "redo" records.
 
 1. Install chart.
    Example:
