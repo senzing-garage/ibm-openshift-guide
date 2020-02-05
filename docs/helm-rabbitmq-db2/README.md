@@ -27,7 +27,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [Time](#time)
     1. [Background knowledge](#background-knowledge)
 1. [Prerequisites](#prerequisites)
-    1. [Cloud Pak for Data](#cloud-pak-for-data)
+    1. [IBM Cloud Pak for Data](#ibm-cloud-pak-for-data)
     1. [Hardware Requirements](#hardware-requirements)
     1. [Software Requirements](#software-requirements)
     1. [Security Requirements](#security-requirements)
@@ -93,7 +93,7 @@ This repository assumes a working knowledge of:
 
 ## Prerequisites
 
-### Cloud Pak for Data
+### IBM Cloud Pak for Data
 
 1. See [Installing IBM Cloud Pak for Data](https://www.ibm.com/support/knowledgecenter/SSQNUZ_2.5.0/cpd/install/install.html).
 
@@ -599,7 +599,7 @@ in later steps.
 ### Install Senzing license
 
 :thinking: **Optional:**
-Senzing for IBM CloudPak for Data comes with a trial license that supports one million records.
+Senzing for IBM Cloud Pak for Data comes with a trial license that supports one million records.
 If this is sufficient, there is no need to install a new license
 and this step may be skipped.
 
