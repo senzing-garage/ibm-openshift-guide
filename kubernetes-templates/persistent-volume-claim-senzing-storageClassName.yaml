@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: glusterfs-storage
+  storageClassName: ${PERSISTENT_VOLUME_STORAGE_CLASS_NAME}
