@@ -38,6 +38,7 @@ The following diagram shows the relationship of the Helm charts, docker containe
     1. [EULA](#eula)
     1. [Environment variables](#environment-variables)
     1. [Security context](#security-context)
+    1. [Persistent volume storage class](#persistent-volume-storage-class)
     1. [Database connection information](#database-connection-information)
     1. [Create custom helm values files](#create-custom-helm-values-files)
     1. [Create custom kubernetes configuration files](#create-custom-kubernetes-configuration-files)
@@ -216,6 +217,15 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     export SENZING_RUN_AS_USER=1001
     export SENZING_RUN_AS_GROUP=1001
     export SENZING_FS_GROUP=1001
+    ```
+
+### Persistent volume storage class
+
+1. :pencil2: Environment variables for `spec.storageClassName` values.
+   Example:
+
+    ```console
+    export PERSISTENT_VOLUME_STORAGE_CLASS_NAME=nfs-client
     ```
 
 ### Database connection information
