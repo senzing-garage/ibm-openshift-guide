@@ -458,6 +458,15 @@ Only one method of creating PVCs is needed.
 
 This deployment initializes the Persistent Volume with Senzing code and data.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-runasany \
+      -z ${DEMO_PREFIX}-senzing-yum
+    ```
+
 1. Install chart.
    Example:
 
@@ -469,18 +478,18 @@ This deployment initializes the Persistent Volume with Senzing code and data.
       senzing/senzing-yum
     ```
 
+### Install IBM Db2 Driver
+
+This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
+
 1. Add Security Context Constraint.
    Example:
 
     ```console
     oc adm policy add-scc-to-user \
       senzing-security-context-constraint-runasany \
-      -z ${DEMO_PREFIX}-senzing-yum
+      -z ${DEMO_PREFIX}-ibm-db2-driver-installer
     ```
-
-### Install IBM Db2 Driver
-
-This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
 
 1. Install chart.
    Example:
@@ -493,18 +502,18 @@ This deployment adds the IBM Db2 Client driver code to the Persistent Volume.
       senzing/ibm-db2-driver-installer
     ```
 
+### Install RabbitMQ Helm chart
+
+This deployment creates a RabbitMQ service.
+
 1. Add Security Context Constraint.
    Example:
 
     ```console
     oc adm policy add-scc-to-user \
       senzing-security-context-constraint-runasany \
-      -z ${DEMO_PREFIX}-ibm-db2-driver-installer
+      -z ${DEMO_PREFIX}-rabbitmq
     ```
-
-### Install RabbitMQ Helm chart
-
-This deployment creates a RabbitMQ service.
 
 1. Install chart.
    Example:
@@ -515,15 +524,6 @@ This deployment creates a RabbitMQ service.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/rabbitmq.yaml \
       stable/rabbitmq
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-runasany \
-      -z ${DEMO_PREFIX}-rabbitmq
     ```
 
 1. Wait for pods to run.
@@ -541,6 +541,15 @@ This deployment creates a RabbitMQ service.
 
 The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-mock-data-generator
+    ```
+
 1. Install chart.
    Example:
 
@@ -552,19 +561,19 @@ The mock data generator pulls JSON lines from a file and pushes them to RabbitMQ
       senzing/senzing-mock-data-generator
     ```
 
+### Install senzing-base Helm Chart
+
+This deployment provides a pod that is used to copy files to and from the Persistent Volume
+in later steps.
+
 1. Add Security Context Constraint.
    Example:
 
     ```console
     oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-limited \
-      -z ${DEMO_PREFIX}-senzing-mock-data-generator
+      senzing-security-context-constraint-runasany \
+      -z ${DEMO_PREFIX}-senzing-base
     ```
-
-### Install senzing-base Helm Chart
-
-This deployment provides a pod that is used to copy files to and from the Persistent Volume
-in later steps.
 
 1. Install chart.
    Example:
@@ -575,15 +584,6 @@ in later steps.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-base.yaml \
        senzing/senzing-base
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-runasany \
-      -z ${DEMO_PREFIX}-senzing-base
     ```
 
 1. Find pod name.
@@ -750,6 +750,15 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
 The init-container creates files from templates and initializes the G2 database.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-runasany \
+      -z ${DEMO_PREFIX}-senzing-init-container
+    ```
+
 1. Install chart.
    Example:
 
@@ -759,15 +768,6 @@ The init-container creates files from templates and initializes the G2 database.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-init-container.yaml \
       senzing/senzing-init-container
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-runasany \
-      -z ${DEMO_PREFIX}-senzing-init-container
     ```
 
 1. Wait for pods to run.
@@ -783,6 +783,15 @@ The init-container creates files from templates and initializes the G2 database.
 
 The Senzing Configurator is a micro-service for changing Senzing configuration.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-configurator
+    ```
+
 1. Install chart.
    Example:
 
@@ -794,20 +803,20 @@ The Senzing Configurator is a micro-service for changing Senzing configuration.
       senzing/senzing-configurator
     ```
 
+1. :thinking: **Optional:** To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
+
+### Install senzing-stream-loader Helm chart
+
+The stream loader pulls messages from RabbitMQ and sends them to Senzing.
+
 1. Add Security Context Constraint.
    Example:
 
     ```console
     oc adm policy add-scc-to-user \
       senzing-security-context-constraint-limited \
-      -z ${DEMO_PREFIX}-senzing-configurator
+      -z ${DEMO_PREFIX}-senzing-stream-loader
     ```
-
-1. :thinking: **Optional:** To view Senzing Configurator, see [View Senzing Configurator](#view-senzing-configurator).
-
-### Install senzing-stream-loader Helm chart
-
-The stream loader pulls messages from RabbitMQ and sends them to Senzing.
 
 1. Install chart.
    Example:
@@ -818,15 +827,6 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-stream-loader-rabbitmq.yaml \
       senzing/senzing-stream-loader
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-limited \
-      -z ${DEMO_PREFIX}-senzing-stream-loader
     ```
 
 ### Install senzing-redoer Helm chart
@@ -857,6 +857,15 @@ The Senzing Redoer processes Senzing "redo" records.
 
 The Senzing API server receives HTTP requests to read and modify Senzing data.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-api-server
+    ```
+
 1. Install chart.
    Example:
 
@@ -866,15 +875,6 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-api-server.yaml \
       senzing/senzing-api-server
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-limited \
-      -z ${DEMO_PREFIX}-senzing-api-server
     ```
 
 1. Wait for pods to run.
@@ -892,6 +892,15 @@ The Senzing API server receives HTTP requests to read and modify Senzing data.
 
 The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing search capabilities.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-entity-search-web-app
+    ```
+
 1. Install chart.
    Example:
 
@@ -901,15 +910,6 @@ The Senzing Entity Search WebApp is a light-weight WebApp demonstrating Senzing 
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-entity-search-web-app.yaml \
       senzing/senzing-entity-search-web-app
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-limited \
-      -z ${DEMO_PREFIX}-senzing-entity-search-web-app
     ```
 
 1. Wait for pod to run.
@@ -1038,6 +1038,15 @@ There are 2 methods to find the IP address.
 This deployment provides a pod that can be used to view Persistent Volumes
 and run Senzing utility programs.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-runasany \
+      -z ${DEMO_PREFIX}-senzing-debug
+    ```
+
 1. Install chart.
    Example:
 
@@ -1047,15 +1056,6 @@ and run Senzing utility programs.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-debug.yaml \
        senzing/senzing-debug
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-runasany \
-      -z ${DEMO_PREFIX}-senzing-debug
     ```
 
 1. Wait for pod to run.
