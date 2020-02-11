@@ -744,6 +744,7 @@ The step copies the SQL file used to create the Senzing database schema onto the
 
     db2 UPDATE SYS_SEQUENCE SET CACHE_SIZE=100000
     db2 commit
+    db2 terminate
     ```
 
 ### Install senzing-init-container Helm chart
@@ -833,6 +834,15 @@ The stream loader pulls messages from RabbitMQ and sends them to Senzing.
 
 The Senzing Redoer processes Senzing "redo" records.
 
+1. Add Security Context Constraint.
+   Example:
+
+    ```console
+    oc adm policy add-scc-to-user \
+      senzing-security-context-constraint-limited \
+      -z ${DEMO_PREFIX}-senzing-redoer
+    ```
+
 1. Install chart.
    Example:
 
@@ -842,15 +852,6 @@ The Senzing Redoer processes Senzing "redo" records.
       --namespace ${DEMO_NAMESPACE} \
       --values ${HELM_VALUES_DIR}/senzing-redoer.yaml \
       senzing/senzing-redoer
-    ```
-
-1. Add Security Context Constraint.
-   Example:
-
-    ```console
-    oc adm policy add-scc-to-user \
-      senzing-security-context-constraint-limited \
-      -z ${DEMO_PREFIX}-senzing-redoer
     ```
 
 ### Install senzing-api-server Helm chart
