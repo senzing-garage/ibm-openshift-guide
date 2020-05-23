@@ -210,7 +210,8 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
     oc ................
     ```
 
-1. :pencil2: Environment variables for `securityContext` values.
+1. :pencil2: Environment variables for `securityContext` values. See
+   [Managing Security Context Constraints](https://docs.openshift.com/container-platform/4.3/authentication/managing-security-context-constraints.html) to determine the correct values.
    Example:
 
     ```console
