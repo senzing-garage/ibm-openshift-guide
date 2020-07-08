@@ -11,7 +11,7 @@ The instructions show how to set up a system that:
     1. In this implementation, the queue is RabbitMQ.
 1. Reads messages from the queue and inserts into Senzing.
     1. In this implementation, Senzing keeps its data in an IBM Db2 database.
-1. Reads information from Senzing via [Senzing REST API](https://github.com/Senzing/senzing-rest-api) server.
+1. Reads information from Senzing via [Senzing API Server](https://github.com/Senzing/senzing-api-server) server.
 1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
 
 For more information, see
@@ -1007,7 +1007,7 @@ There are 2 methods to find the IP address.
 1. If not already done, [update hosts file](#update-hosts-file).
 1. View results from Senzing REST API server.
    The server supports the
-   [Senzing REST API](https://github.com/Senzing/senzing-rest-api).
+   [Senzing API Server](https://github.com/Senzing/senzing-api-server).
    1. From a web browser.
       Examples:
       1. [senzing-api.local/heartbeat](http://senzing-api.local/heartbeat)
@@ -1024,7 +1024,7 @@ There are 2 methods to find the IP address.
         curl -X GET ${SENZING_API_SERVICE}/entities/1
         ```
 
-   1. From [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api/master/senzing-rest-api.yaml).
+   1. From [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/master/senzing-rest-api.yaml).
 
 #### View Senzing Entity Search WebApp
 

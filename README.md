@@ -11,7 +11,7 @@ The instructions show how to set up a system that:
 1. Reads JSON lines from a file on the internet.
 1. Sends each JSON line to a message queue.
 1. Reads messages from the queue and inserts into Senzing.
-1. Reads information from Senzing via [Senzing REST API](https://github.com/Senzing/senzing-rest-api) server.
+1. Reads information from Senzing via [Senzing API Server](https://github.com/Senzing/senzing-api-server) server.
 1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
 
 For more information, see
