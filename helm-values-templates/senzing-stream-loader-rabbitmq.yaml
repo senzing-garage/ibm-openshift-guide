@@ -18,7 +18,7 @@ senzing:
   subcommand: rabbitmq
   databaseUrl: "${SENZING_DATABASE_URL}"
   dataSource: TEST
-  entityType: TEST
+  entityType: GENERIC
   logLevel: info
   monitoringPeriod: 60
   persistentVolumeClaim: senzing-persistent-volume-claim
