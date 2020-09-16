@@ -9,6 +9,6 @@ spec:
   capacity:
     storage: 100Gi
   nfs:
-    path: /disk2/nfspv
-    server: bsr-openshift-nfs-0
+    path: ${NFS_PATH}
+    server: ${NFS_SERVER}
   persistentVolumeReclaimPolicy: Retain
