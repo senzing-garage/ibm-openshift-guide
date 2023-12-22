@@ -18,11 +18,11 @@ jobs:
   check-membership:
     runs-on: ubuntu-latest
     steps:
-    - name: run script
-      env:
+      - name: run script
+        env:
           BOOL: ${{ contains( env.MEMBER_LIST, env.CREATOR ) }}
-      if: ${{ env.BOOL == 'false' }}
-      uses: Senzing/github-action-identify-customer@main
+        if: ${{ env.BOOL == 'false' }}
+        uses: senzing-factory/github-action-identify-customer@main
   automate-issues-labels:
     runs-on: ubuntu-latest
     steps:
