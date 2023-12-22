@@ -1,3 +1,5 @@
 .DS_Store
 helm-values/
 kubernetes/
+
+.history

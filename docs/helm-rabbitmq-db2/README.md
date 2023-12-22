@@ -88,10 +88,10 @@ Budget 4 hours to get the demonstration up-and-running, depending on CPU and net
 
 This repository assumes a working knowledge of:
 
-1. [Docker](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/docker.md)
-1. [Kubernetes](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/kubernetes.md)
-1. [OpenShift](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/openshift.md)
-1. [Helm](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/helm.md)
+1. [Docker](https://github.com/senzing-garage/knowledge-base/blob/main/WHATIS/docker.md)
+1. [Kubernetes](https://github.com/senzing-garage/knowledge-base/blob/main/WHATIS/kubernetes.md)
+1. [OpenShift](https://github.com/senzing-garage/knowledge-base/blob/main/WHATIS/openshift.md)
+1. [Helm](https://github.com/senzing-garage/knowledge-base/blob/main/WHATIS/helm.md)
 
 ## Prerequisites
 
@@ -132,7 +132,7 @@ The Git repository has files that will be used in the `helm install --values` pa
     export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
     ```
 
-1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/clone-repository.md) to install the Git repository.
+1. Follow steps in [clone-repository](https://github.com/senzing-garage/knowledge-base/blob/main/HOWTO/clone-repository.md) to install the Git repository.
 
 ### Database
 
@@ -169,7 +169,7 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 1. :warning: This step is intentionally tricky and not simply copy/paste.
    This ensures that you make a conscious effort to accept the EULA.
    See
-   [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md#senzing_accept_eula)
+   [SENZING_ACCEPT_EULA](https://github.com/senzing-garage/knowledge-base/blob/main/lists/environment-variables.md#senzing_accept_eula)
    for the correct value.
    Replace the double-quote character in the example with the correct value.
    The use of the double-quote character is intentional to prevent simple copy/paste.
@@ -630,7 +630,7 @@ If this is sufficient, there is no need to install a new license
 and this step may be skipped.
 
 1. If working with more than one million records,
-   [obtain a Senzing license](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/obtain-senzing-license.md).
+   [obtain a Senzing license](https://github.com/senzing-garage/knowledge-base/blob/main/HOWTO/obtain-senzing-license.md).
 
 1. Be sure the `senzing-base` Helm Chart has been installed and is running.
    See "[Install senzing-base Helm Chart](#install-senzing-base-helm-chart)".
@@ -1044,7 +1044,7 @@ There are 2 methods to find the IP address.
 
 1. If not already done, [update hosts file](#update-hosts-file).
 1. Senzing Entity Search WebApp will be viewable at [senzing-entity-search.local](http://senzing-entity-search.local).
-   The [demonstration](https://github.com/Senzing/knowledge-base/blob/main/demonstrations/docker-compose-web-app.md)
+   The [demonstration](https://github.com/senzing-garage/knowledge-base/blob/main/demonstrations/docker-compose-web-app.md)
    instructions will give a tour of the Senzing web app.
 
 ## Troubleshooting
@@ -1114,7 +1114,7 @@ If the instructions don't address an issue you are seeing, please "submit a requ
 
 1. [Submit a request](https://senzing.zendesk.com/hc/en-us/requests/new)
 1. Email: [support@senzing.com](mailto:support@senzing.com)
-1. [Report an issue on GitHub](https://github.com/Senzing/ibm-openshift-guide/issues)
+1. [Report an issue on GitHub](https://github.com/senzing-garage/ibm-openshift-guide/issues)
 
 This repository is a community project.
 Feel free to submit a Pull Request for change.
