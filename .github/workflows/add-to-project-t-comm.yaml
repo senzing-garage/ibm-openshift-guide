@@ -15,8 +15,8 @@ jobs:
   assign_one_project:
     runs-on: ubuntu-latest
     steps:
-    - name: Assign issues to project
-      uses: Senzing/github-action-add-issue-to-project@main
-      with:
-        project: 'https://github.com/orgs/Senzing/projects/2'
-        column_name: 'Backlog'
+      - name: Assign issues to project
+        uses: senzing-factory/github-action-add-issue-to-project@main
+        with:
+          project: "https://github.com/orgs/senzing-garage/projects/3"
+          column_name: "Backlog"
