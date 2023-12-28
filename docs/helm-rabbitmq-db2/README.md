@@ -11,8 +11,8 @@ The instructions show how to set up a system that:
     1. In this implementation, the queue is RabbitMQ.
 1. Reads messages from the queue and inserts into Senzing.
     1. In this implementation, Senzing keeps its data in an IBM Db2 database.
-1. Reads information from Senzing via [Senzing API Server](https://github.com/Senzing/senzing-api-server) server.
-1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
+1. Reads information from Senzing via [Senzing API Server](https://github.com/senzing-garage/senzing-api-server) server.
+1. Views resolved entities in a [web app](https://github.com/senzing-garage/entity-search-web-app).
 
 For more information, see
 [Senzing Entity Resolution for IBM Cloud Pak for Data](https://senzing.com/cloud_pak_for_data).
@@ -1021,7 +1021,7 @@ There are 2 methods to find the IP address.
 1. If not already done, [update hosts file](#update-hosts-file).
 1. View results from Senzing REST API server.
    The server supports the
-   [Senzing API Server](https://github.com/Senzing/senzing-api-server).
+   [Senzing API Server](https://github.com/senzing-garage/senzing-api-server).
    1. From a web browser.
       Examples:
       1. [senzing-api.local/heartbeat](http://senzing-api.local/heartbeat)
@@ -1106,9 +1106,9 @@ and run Senzing utility programs.
 
 Additional information:
 
-1. [Helm Charts](https://github.com/Senzing/awesome#helm-charts)
-1. [Docker images on Docker Hub](https://github.com/Senzing/awesome#dockerhub)
-1. [Dockerfiles](https://github.com/Senzing/awesome#dockerfiles)
+1. [Helm Charts](https://github.com/senzing-garage/awesome#helm-charts)
+1. [Docker images on Docker Hub](https://github.com/senzing-garage/awesome#dockerhub)
+1. [Dockerfiles](https://github.com/senzing-garage/awesome#dockerfiles)
 
 If the instructions don't address an issue you are seeing, please "submit a request" so we can help you.
 
