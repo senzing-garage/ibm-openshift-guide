@@ -1,5 +1,11 @@
 # ibm-openshift-guide
 
+## :no_entry: Deprecated
+
+Instructions are out-of-date.
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 If you are beginning your journey with
 [Senzing](https://senzing.com/),
 please start with
